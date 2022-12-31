@@ -177,7 +177,7 @@ jobs:
      - checkout
      - restore_cache:
           keys: [front-build-depend]
-      - run:
+     - run:
           name: front-end scan
           command: |
             cd frontend
