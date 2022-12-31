@@ -61,7 +61,7 @@ jobs:
 
       - save_cache:
             paths: [frontend/node_modules]
-            key: frontend-build-
+            key: frontend-build-depend
             ##
       
 
@@ -99,7 +99,7 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build-depend
   
-
+#**********************************
 
 
 #   test-frontend:
@@ -117,6 +117,42 @@ jobs:
 #       # Checkout code from git
 #       # Restore from cache
 #       # Your job code here
+
+
+
+#**************************************
+  test-frontend:
+    docker:
+      - image: cimg/node:13.8.0 # Docker image here
+    steps:
+      steps:
+      - checkout
+      - restore_cache:
+          keys: [frontend-build-depend]
+      - run:
+          name: front-end-unit-test
+          command: |
+            cd frontend
+            npm install 
+            npm run test
+                
+  test-backend:
+    docker:
+      - image: cimg/node:13.8.0 # Docker image here
+    steps:
+      steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-build-depend]
+      - run:
+          name: Back-end unit-test
+          command: |
+            cd backend
+            npm install 
+            npm run test
+
+
+#***********************************
             
 #   scan-frontend:
 #     docker:
@@ -305,10 +341,10 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      # - test-frontend:
-      #     requires: [build-frontend]
-      # - test-backend:
-      #     requires: [build-backend]
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
       # - scan-backend:
       #     requires: [build-backend]
       # - scan-frontend:
