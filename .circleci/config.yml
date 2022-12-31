@@ -120,12 +120,11 @@ jobs:
 
 
 
-#**************************************
+#*****************************************
   test-frontend:
     docker:
       - image: cimg/node:13.8.0 # Docker image here
     steps:
-      steps:
       - checkout
       - restore_cache:
           keys: [frontend-build-depend]
@@ -140,7 +139,6 @@ jobs:
     docker:
       - image: cimg/node:13.8.0 # Docker image here
     steps:
-      steps:
       - checkout
       - restore_cache:
           keys: [backend-build-depend]
