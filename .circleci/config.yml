@@ -175,7 +175,7 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
      - checkout
-      - restore_cache:
+     - restore_cache:
           keys: [front-build-depend]
       - run:
           name: front-end scan
@@ -184,7 +184,7 @@ jobs:
             npm install 
             npm audit --audit-level=critical
 
-  scan-backend:
+  scan-backend:    
     docker:
       - image: cimg/node:13.8.0
     steps:
