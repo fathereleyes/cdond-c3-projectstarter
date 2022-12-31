@@ -50,9 +50,9 @@ jobs:
           
           name: Build front-end
           command: |
-          cd frontend
-          npm install 
-          npm run build
+            cd frontend
+            npm install 
+            npm run build
                 
           
       # - save_cache:
@@ -61,7 +61,8 @@ jobs:
 
       - save_cache:
             paths: [frontend/node_modules]
-            key: frontend-build-depend
+            key: frontend-build-
+            ##
       
 
   # build-backend:
