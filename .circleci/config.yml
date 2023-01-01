@@ -186,26 +186,45 @@ jobs:
             npm audit fix
             npm audit --audit-level=critical
 
-  scan-backend:    
+  scan-backend:
     docker:
-      - image: cimg/node:13.8.0
+    - image: cimg/node:13.8.0
     steps:
-     - checkout
-     - restore_cache:
-          keys:
-            - backend-deps-{{ checksum "backend/package-lock.json" }}
-    #  - restore_cache:
-    #       keys: [backend-build-depend]
-     - run:
-          name: Back-end scan
-          command: |
-              cd backend
-              npm install 
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix
-              npm audit --audit-level=critical
+    - checkout
+    - restore_cache:
+       keys:
+         - backend-deps-{{ checksum "backend/package-lock.json" }}
+    - run:
+        name: Install dependencies
+        command: |
+          cd backend
+          npm install
+    - run:
+        name: Scan backend packages
+        command: |
+          cd backend
+          npm audit --audit-level=critical          
+
+  # scan-backend:    
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #    - checkout
+  #    - restore_cache:
+  #         keys:
+  #           - backend-deps-{{ checksum "backend/package-lock.json" }}
+  #   #  - restore_cache:
+  #   #       keys: [backend-build-depend]
+  #    - run:
+  #         name: Back-end scan
+  #         command: |
+  #             cd backend
+  #             npm install 
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit fix --force --audit-level=critical
+  #             npm audit fix
+  #             npm audit --audit-level=critical
 
 #   deploy-infrastructure:
 #     docker:
