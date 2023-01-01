@@ -190,12 +190,12 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - checkout
-      - restore_cache:
+     - checkout
+     - restore_cache:
           keys: [backend-build-depend]
-      - run:
-           name: Back-end scan
-           command: |
+     - run:
+          name: Back-end scan
+          command: |
               cd backend
               npm install 
               npm audit fix --force --audit-level=critical
