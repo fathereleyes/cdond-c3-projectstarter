@@ -236,7 +236,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
@@ -293,7 +292,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
@@ -317,7 +315,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
@@ -341,7 +338,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
@@ -365,7 +361,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
@@ -389,7 +384,6 @@ jobs:
             npm audit fix
             npm audit fix
             npm audit --audit-level=critical
-            npm install 
             npm audit fix
             npm audit fix
             npm audit fix
