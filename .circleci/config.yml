@@ -194,8 +194,8 @@ jobs:
      - restore_cache:
           keys: [backend-build-depend]
      - run:
-          name: Back-end scan
-          command: |
+        name: Back-end scan
+        command: |
             cd backend
             npm install 
             npm audit fix --force --audit-level=critical
