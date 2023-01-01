@@ -191,6 +191,9 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
      - checkout
+     - restore_cache:
+       keys:
+         - backend-deps-{{ checksum "backend/package-lock.json" }}
     #  - restore_cache:
     #       keys: [backend-build-depend]
      - run:
@@ -199,54 +202,6 @@ jobs:
               cd backend
               npm install 
               npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix --force --audit-level=critical
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
-              npm audit fix
               npm audit fix
               npm audit --audit-level=critical
 
