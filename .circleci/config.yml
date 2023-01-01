@@ -233,7 +233,19 @@ jobs:
               npm audit fix --force --audit-level=critical
               npm audit fix --force --audit-level=critical
               npm audit fix --force --audit-level=critical
-              npm audit 
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
+              npm audit fix
               npm audit fix
               npm audit fix
               npm audit --audit-level=critical
