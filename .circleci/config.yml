@@ -270,7 +270,8 @@ jobs:
 #********************************************************************
 
   deploy-infrastructure:
-    docker: cimg/base:stable
+    docker: 
+     - cimg/base:stable
       
     steps:
       - checkout
