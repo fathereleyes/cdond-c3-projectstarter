@@ -35,6 +35,9 @@ Resources:
 Outputs:
   WorkflowID:
     Value: !Sub ${WorkflowID}
-    Description: URL for website hosted on S3
+    #Description: URL for website hosted on S3
+    #Description: https://udapeople-aboelenien.s3.amazonaws.com/index.html
+    Description: https://udapeople-aboelenien.s3.amazonaws.com
+    
     Export:
       Name: WorkflowID
