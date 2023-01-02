@@ -272,7 +272,7 @@ jobs:
 
     deploy-infrastructure:
       docker: 
-      - cimg/base:stable
+        - cimg/base:stable
         
       steps:
         - checkout
