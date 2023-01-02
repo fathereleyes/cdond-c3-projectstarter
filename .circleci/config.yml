@@ -290,7 +290,7 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} " \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-              exit 1
+              #exit 1
       - run:
           name: Add back-end ip to ansible inventory
           command: |
