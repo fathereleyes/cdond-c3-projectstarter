@@ -2,23 +2,23 @@ version: 2.1
 
 commands:
   install_awscli:
-  steps:
-   - run: 
-       name: install aws cli v2
-       command: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install 
+    steps:
+    - run: 
+        name: install aws cli v2
+        command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install 
   install_ansible:
-  describation : install ansible v2
-  steps:
-   - run: 
-       name: install ansible v2
-       command: |
-          $ sudo apt update
-          $ sudo apt install software-properties-common
-          $ sudo add-apt-repository --yes --update ppa:ansible/ansible
-          $ sudo apt install ansible           
+    describation : install ansible v2
+    steps:
+    - run: 
+        name: install ansible v2
+        command: |
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible           
 
 
 # commands:
