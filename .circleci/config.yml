@@ -241,12 +241,12 @@ jobs:
     steps:
       - checkout
       - install-awscli
-      - run: 
-          name: install-awscli
-          command: |
-              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                unzip awscliv2.zip
-                sudo ./aws/install 
+      # - run: 
+      #     name: install-awscli
+      #     command: |
+      #         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      #           unzip awscliv2.zip
+      #           sudo ./aws/install 
       - run : 
             name: Ensure back-end infrastructure exist
             command: |
