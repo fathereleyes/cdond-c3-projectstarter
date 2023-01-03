@@ -240,7 +240,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-     # - install-awscli
+      - install-awscli
       - run: 
           name: install aws cli
           command: |
