@@ -5,7 +5,7 @@ commands:
     description: Install aws cli v2
     steps:
       - run: 
-          name: Install aws cli and some
+          name: Install aws cli 
           command: |
                 sudo apt update 
                 sudo apt-get install awscli
