@@ -240,7 +240,7 @@ jobs:
       steps:
         - checkout
         - install-awscli
-              run: 
+        - run : 
               name: Ensure back-end infrastructure exists
               
               command: |
