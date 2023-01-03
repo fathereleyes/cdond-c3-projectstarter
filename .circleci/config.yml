@@ -274,10 +274,10 @@ jobs:
                 echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
                 cat .circleci/ansible/inventorey.text 
         ##         #exit 1
-        - persist_to_workspace:
-            root: ~/
-            paths:
-              - project/.circleci/ansible/inventory.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
         # #Here's where you will add some code to rollback on failure
 
 
