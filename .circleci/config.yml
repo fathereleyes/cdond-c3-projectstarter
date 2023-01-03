@@ -266,8 +266,8 @@ jobs:
                   --filters "Name=tag:Name=Values,=backend-${circleci-workflow-ID:0:7}" \
                   --QUERY 'Reservation [*].Instance[*].PublicIpAddress' \
                   --Output text ) 
-                echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
-                cat .circleci/ansible/inventorey.text 
+                      echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
+                      cat .circleci/ansible/inventorey.text 
         ##         #exit 1
       - persist_to_workspace:
             root: ~/
