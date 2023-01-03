@@ -5,15 +5,15 @@ commands:
     description: Install aws cli v2
     steps:
       - run: 
-          name: Install aws cli
+          name: Install aws cli and some
           command: |
-                curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
                 sudo apt-get install zip
                 sudo apt-get install unzip
                 sudo apt install vim
-                sudo unzip awscliv2.zip
-                sudo ./aws/install 
-                sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+                # sudo unzip awscliv2.zip
+                # sudo ./aws/install 
+                # sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
   install_ansible:
     description: install ansible 
     steps:
@@ -266,12 +266,12 @@ jobs:
       - run :
             name: Add back-end ip to ansible inventory
             command: |
-                BACKEND_PUBLIC_IP=$( AWS ec2 describe-instances  \
-                  --filters "Name=tag:Name=Values,=backend-${circleci-workflow-ID:0:7}" \
-                  --QUERY 'Reservation [*].Instance[*].PublicIpAddress' \
-                  --Output text ) 
-                      echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
-                      cat .circleci/ansible/inventorey.text 
+              BACKEND_PUBLIC_IP=$( AWS ec2 describe-instances  \
+                --filters "Name=tag:Name=Values,=backend-${circleci-workflow-ID:0:7}" \
+                --QUERY 'Reservation [*].Instance[*].PublicIpAddress' \
+                --Output text ) 
+                    echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
+                    cat .circleci/ansible/inventorey.text 
         ##         #exit 1
       - persist_to_workspace:
             root: ~/
