@@ -241,7 +241,7 @@ jobs:
         - checkout
         - install-awscli
         - run:
-            name: Ensure back-end infrastructure exists
+            name: Ensure back_end infrastructure exists
             command: |
               aws cloudformation deploy \
                 --template-file .circleci/files/backend.yml \
