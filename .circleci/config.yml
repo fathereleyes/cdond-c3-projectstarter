@@ -273,7 +273,7 @@ jobs:
                   --Output text ) 
                 echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
                 cat .circleci/ansible/inventorey.text 
-        #         #exit 1
+        ##         #exit 1
         # - persist_to_workspace:
         #     root: ~/
         #     paths:
