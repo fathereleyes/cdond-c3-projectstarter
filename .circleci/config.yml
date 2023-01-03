@@ -239,7 +239,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      # - install-awscli
+     # - install-awscli
       - run: 
           name: install aws cli
           command: |
@@ -252,7 +252,7 @@ jobs:
               aws cloudformation deploy \
                 -- template-file .circleci/files/backend.yml \
                 --  project=udapeople \
-                -- stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} " \
+                -- stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 -- parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
         # - run:
         #     name: Ensure front-end infrastructure exist
