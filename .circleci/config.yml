@@ -20,8 +20,6 @@ commands:
               sudo apt install software-properties-common
               sudo add-apt-repository --yes --update ppa:ansible/ansible
               sudo apt install ansible           
-
-
 # commands:
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -170,8 +168,6 @@ jobs:
             cd backend
             npm install 
             npm run test
-
-
 #***********************************
             
 #   scan-frontend:
@@ -207,7 +203,6 @@ jobs:
             npm audit fix --force --audit-level=critical
             npm audit fix
             npm audit --audit-level=critical
-
   
   scan-backend:    
     docker:
@@ -246,6 +241,7 @@ jobs:
       #     command: |
       #         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       #           unzip awscliv2.zip
+      #   #        sudo ./aws/install 
       - run : 
             name: Ensure back-end infrastructure exist
             command: |
@@ -263,21 +259,21 @@ jobs:
                 --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
                 #exit 1
-      - run :
-            name: Add back-end ip to ansible inventory
-            command: |
-              BACKEND_PUBLIC_IP=$( AWS ec2 describe-instances  \
-                --filters "Name=tag:Name=Values,=backend-${circleci-workflow-ID:0:7}" \
-                --QUERY 'Reservation [*].Instance[*].PublicIpAddress' \
-                --Output text ) 
-              echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
-              cat .circleci/ansible/inventorey.text 
-        #         #exit 1
-      - persist_to_workspace:
-            root: ~/
-            paths:
-              - project/.circleci/ansible/inventory.txt
-        # #Here's where you will add some code to rollback on failure
+      # - run :
+      #       name: Add back-end ip to ansible inventory
+      #       command: |
+      #           BACKEND_PUBLIC_IP=$( AWS ec2 describe-instances  \
+      #             --filters "Name=tag:Name=Values,=backend-${circleci-workflow-ID:0:7}" \
+      #             --QUERY 'Reservation [*].Instance[*].PublicIpAddress' \
+      #             --Output text ) 
+      #           echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventorey.text 
+      #           cat .circleci/ansible/inventorey.text 
+        ##         #exit 1
+      # - persist_to_workspace:
+      #       root: ~/
+      #       paths:
+      #         - project/.circleci/ansible/inventory.txt
+      #   # #Here's where you will add some code to rollback on failure
 
 
 
