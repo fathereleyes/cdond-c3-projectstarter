@@ -29,24 +29,24 @@ commands:
               sudo add-apt-repository --yes --update ppa:ansible/ansible
               sudo apt install ansible  
   destroy-environment:
-  description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-  parameters:
-  Workflow_ID:
-    type: string
-    default: ${CIRCLE_WORKFLOW_ID:0:7}
-  steps:
-    - run:
-        name: Destroy environments
-        when: on_fail
-        command: |
-          # Empty frontend bucket
-          aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
+    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    parameters:
+      Workflow_ID:
+        type: string
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
+    steps:
+      - run:
+          name: Destroy environments
+          when: on_fail
+          command: |
+            # Empty frontend bucket
+            aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
 
-          # Delete frontend stack
-          aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>
+            # Delete frontend stack
+            aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>
 
-          # Delete backend stack
-          aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>            
+            # Delete backend stack
+            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>            
 ## commands:
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
