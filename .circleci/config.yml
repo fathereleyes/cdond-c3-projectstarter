@@ -299,7 +299,17 @@ jobs:
       - persist_to_workspace:
             root: ~/
             paths:
-              - project/.circleci/ansible/inventory.txt
+              - project/.circleci/ansible/inventory.txt   
+
+
+     destroy-environment-2: 
+
+      - run:
+          name: destorey stacks 
+          command: |
+           - destroy-environment
+       
+
       #   # #Here's where you will add some code to rollback on failure
   # destroy-environment:
   #   description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
