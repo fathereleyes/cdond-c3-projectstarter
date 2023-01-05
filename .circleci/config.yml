@@ -388,29 +388,29 @@ jobs:
 #      # Here's where you will add some code to rollback on failure   
 
 #************************************************************************
-run-migrations:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - install_awscli  
-      - run:
-           name: run migerations
-           command: |
+  run-migrations:
+      docker:
+        - image: cimg/node:13.8.0
+      steps:
+        - checkout
+        - install_awscli  
+        - run:
+            name: run migerations
+            command: |
 
-            cd backend
-            npm install 
-            npm run migerations > migrations_dump.txt
-      - run: 
-            name: send migeration status to kvdb.io 
-            command: 
-              if grep -q "has been executed sucessfully." ~/project/backend/migerations_dump.txt
-              then 
-                curl  https://kvdb.io/${KVDB_BUCKET}/migeration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
-              fi 
-      - destroy-environment
-      - revert-migerations                  
-                
+              cd backend
+              npm install 
+              npm run migerations > migrations_dump.txt
+        - run: 
+              name: send migeration status to kvdb.io 
+              command: 
+                if grep -q "has been executed sucessfully." ~/project/backend/migerations_dump.txt
+                then 
+                  curl  https://kvdb.io/${KVDB_BUCKET}/migeration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+                fi 
+        - destroy-environment
+        - revert-migerations                  
+                  
 
 
 
