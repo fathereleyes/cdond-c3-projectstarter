@@ -49,7 +49,7 @@ commands:
             # Delete frontend stack
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >> 
 
-  revert-migrations:
+  revert-migerations:
       description: Revert the last migration, if any were executed during the current workflow
       parameters:
         Workflow_ID:
@@ -411,7 +411,8 @@ jobs:
                   curl  https://kvdb.io/${KVDB_BUCKET}/migeration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
                 fi 
         - destroy-environment
-        - revert-migerations                  
+        - revert-migerations 
+                       
                   
 
 
