@@ -13,10 +13,10 @@ commands:
               sudo apt-get update -y 
               #sudo pip install awscli
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              sudo apt-get install zip -y 
-              sudo apt-get install unzip -y 
-              sudo apt install vim -y 
-              sudo unzip awscliv2.zip -y 
+              sudo apt-get install zip 
+              sudo apt-get install unzip 
+              sudo apt install vim 
+              sudo unzip awscliv2.zip 
               sudo ./aws/install 
               sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
   install_ansible:
