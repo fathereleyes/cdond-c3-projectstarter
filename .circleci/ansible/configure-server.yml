@@ -12,20 +12,6 @@
     ansible_host_key_checking: false
     ansible_stdout_callback: yaml
   
-  - name: "Install Node.js 13"
-    shell: |
-        # Install Node.js LTS version as our base Node.js version
-        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-        sudo apt-get install -y nodejs
-
-        # Use n version manager to switch to Node.js v13.8.0
-        sudo npm install -g n
-        sudo n 13.8.0
-
-  - name: "Install PM2 Globally"
-    npm:
-      name: pm2
-      global: yes      
 
   pre_tasks:
     - name: "wait 600 seconds for target connection to become reachable/usable."
@@ -33,15 +19,18 @@
          timeout: 60000
 
     - name: "install python for Ansible."
-      apt:
-        name: python3
-        update_cache: yes
+      become: true
+      raw: test -e /usr/bin/python3/ || (apt -y update && apt install -y python3 )
+      change_when: false
 
+    - setup 
+
+     
   # # Get the environment variables from CircleCI and add to the EC2 instance
   # environment:
   #   - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"  
   #   # Add more env vars here
 
-    - roles:
-        - configure-server
-        - configure-prometheus-node-exporter
+  - roles:
+      - configure-server
+      - configure-prometheus-node-exporter
