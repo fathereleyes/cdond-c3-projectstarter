@@ -24,9 +24,9 @@
     #   change_when: false
 
     - name: "install python for Ansible."
-    apt:
-      name: python3
-      update_cache: yes
+      apt:
+        name: python3
+        update_cache: yes
 
 #- setup 
 
