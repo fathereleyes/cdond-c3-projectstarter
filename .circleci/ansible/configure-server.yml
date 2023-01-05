@@ -13,7 +13,7 @@
     ansible_stdout_callback: yaml
   
 - name: "Install Node.js 13"
-    shell: |
+  shell: |
       # Install Node.js LTS version as our base Node.js version
       curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
       sudo apt-get install -y nodejs
