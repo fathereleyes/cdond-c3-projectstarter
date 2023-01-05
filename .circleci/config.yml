@@ -7,10 +7,10 @@ commands:
       - run: 
           name: Install aws cli 
           command: |
-              #sudo apt update -y
+              #sudo apt update 
               sudo apt update 
-              sudo apt-get install awscli -y
-              sudo apt-get update -y 
+              sudo apt-get install awscli 
+              sudo apt-get update 
               sudo  install awscli
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               sudo apt-get install zip 
@@ -25,10 +25,10 @@ commands:
       - run: 
           name: install ansible f
           command: |
-              sudo apt update -y 
-              sudo apt install software-properties-common -y 
-              sudo add-apt-repository --yes --update ppa:ansible/ansible -y 
-              sudo apt install ansible -y  
+              sudo apt update 
+              sudo apt install software-properties-common 
+              sudo add-apt-repository --yes --update ppa:ansible/ansible 
+              sudo apt install ansible  
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -284,50 +284,50 @@ jobs:
    #****************************************************
   
 
-  deploy-infrastructure:
-    docker: 
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - install_awscli
-      # - run : 
-      #     name: install_awscli
-      #     command: |
-      #         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      #         unzip awscliv2.zip
-      #         sudo ./aws/install 
-      - run : 
-            name: Ensure back-end infrastructure exist
-            command: |
-              aws cloudformation deploy \
-                --template-file .circleci/files/backend.yml \
-                --tags project=udapeople \
-                --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-                --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-      - run :
-            name: Ensure front-end infrastructure exist
-            command: |
-              aws cloudformation deploy \
-                --template-file .circleci/files/frontend.yml \
-                --tags project=udapeople \
-                --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-                --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-                #exit 1
+  # deploy-infrastructure:
+  #   docker: 
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout
+  #     - install_awscli
+  #     # - run : 
+  #     #     name: install_awscli
+  #     #     command: |
+  #     #         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  #     #         unzip awscliv2.zip
+  #     #         sudo ./aws/install 
+  #     - run : 
+  #           name: Ensure back-end infrastructure exist
+  #           command: |
+  #             aws cloudformation deploy \
+  #               --template-file .circleci/files/backend.yml \
+  #               --tags project=udapeople \
+  #               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+  #               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+  #     - run :
+  #           name: Ensure front-end infrastructure exist
+  #           command: |
+  #             aws cloudformation deploy \
+  #               --template-file .circleci/files/frontend.yml \
+  #               --tags project=udapeople \
+  #               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+  #               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+  #               #exit 1
 
-      - run:
-          name: Add back-end ip to ansible inventory
-          command: |
-            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --output text)
-            echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
-            cat .circleci/ansible/inventory.txt        
-      - persist_to_workspace:
-            root: ~/
-            paths:
-              - project/.circleci/ansible/inventory.txt   
-      - destroy-environment 
+  #     - run:
+  #         name: Add back-end ip to ansible inventory
+  #         command: |
+  #           BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+  #             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+  #             --query 'Reservations[*].Instances[*].PublicIpAddress' \
+  #             --output text)
+  #           echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
+  #           cat .circleci/ansible/inventory.txt        
+  #     - persist_to_workspace:
+  #           root: ~/
+  #           paths:
+  #             - project/.circleci/ansible/inventory.txt   
+  #     - destroy-environment 
 
 #********************************************************************
 #   configure-infrastructure:
