@@ -7,16 +7,16 @@ commands:
       - run: 
           name: Install aws cli 
           command: |
-              #sudo apt update 
+              sudo apt update 
               sudo apt update 
               sudo apt-get install awscli 
               sudo apt-get update 
               ##sudo  install awscli
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              ##sudo apt-get install zip 
-              #sudo apt-get install unzip 
-              #sudo apt install vim 
-              #sudo unzip awscliv2.zip 
+              sudo apt-get install zip 
+              sudo apt-get install unzip 
+              sudo apt install vim 
+              sudo unzip awscliv2.zip 
               sudo ./aws/install 
               sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
   install_ansible:
