@@ -7,16 +7,16 @@ commands:
       - run: 
           name: Install aws cli 
           command: |
-              #sudo apt update 
+              #sudo apt update -y
               sudo apt update 
-              sudo apt-get install awscli 
-              sudo apt-get update
+              sudo apt-get install awscli -y
+              sudo apt-get update -y 
               #sudo pip install awscli
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              sudo apt-get install zip
-              sudo apt-get install unzip
-              sudo apt install vim
-              sudo unzip awscliv2.zip
+              sudo apt-get install zip -y 
+              sudo apt-get install unzip -y 
+              sudo apt install vim -y 
+              sudo unzip awscliv2.zip -y 
               sudo ./aws/install 
               sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
   install_ansible:
@@ -25,10 +25,10 @@ commands:
       - run: 
           name: install ansible f
           command: |
-              sudo apt update
-              sudo apt install software-properties-common
-              sudo add-apt-repository --yes --update ppa:ansible/ansible
-              sudo apt install ansible  
+              sudo apt update -y 
+              sudo apt install software-properties-common -y 
+              sudo add-apt-repository --yes --update ppa:ansible/ansible -y 
+              sudo apt install ansible -y  
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
