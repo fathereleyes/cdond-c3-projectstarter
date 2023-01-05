@@ -48,7 +48,7 @@ commands:
 
             # Delete frontend stack
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>
-
+#****************************************************************
            
 ## commands:
 #   destroy-environment:
@@ -62,7 +62,7 @@ commands:
 #           command: |
 #             # Your code here
 #             exit 1
-
+#************************************************
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
 #     parameters:
@@ -81,7 +81,28 @@ commands:
 #             #  Add revert code here. You can find this in the Getting Started section.
 #               exit 1
 #             fi
-            
+#*********************************************************
+  revert-migrations:
+    description: Revert the last migration, if any were executed during the current workflow
+    parameters:
+      Workflow_ID:
+        type: string
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
+    steps:
+      - run:
+          name: Revert migrations
+          when: on_fail
+          command: |
+            SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
+
+            # Logic for reverting the database state
+            if (( $SUCCESS == 1 ));
+            then
+              cd ~/project/backend
+              npm install
+              npm run migration:revert
+            fi
+####################################################################
 jobs:
   build-frontend:
     docker:
@@ -360,27 +381,36 @@ jobs:
 #             # Your code here
 #             exit 1
 #       - run:
-#           name: Send migration results to memstash
+#           name: Send migration results to memstash or kvdb.io
 #           command: |
 #             # Your code here
 #             exit 1
 #      # Here's where you will add some code to rollback on failure   
 
 #************************************************************************
-  # run-migrations:
-  # install_nodejs:
-  #   description: Install Node.js 13.8.0
-  #   steps:
-  #     - run:
-  #         name: Install Node.js 13.8.0
-  #         command: |
-  #           # Install Node.js LTS version as our base Node.js version
-  #           curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-  #           sudo apt install -y nodejs
+run-migrations:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - install_awscli  
+      - run:
+           name: run migerations
+           command: |
 
-  #           # Use n version manager to use Node.js v13.8.0
-  #           sudo npm install --global n
-  #           sudo n 13.8.0
+            cd backend
+            npm install 
+            npm run migerations > migrations_dump.txt
+      - run: 
+            name: send migeration status to kvdb.io 
+            command: 
+              if grep -q "has been executed sucessfully." ~/project/backend/migerations_dump.txt
+              then 
+                curl  https://kvdb.io/${KVDB_BUCKET}/migeration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+              fi 
+      - destroy-environment
+      - revert-migerations                  
+                
 
 
 
@@ -501,8 +531,8 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
       # - deploy-frontend:
       #     requires: [run-migrations]
       # - deploy-backend:
