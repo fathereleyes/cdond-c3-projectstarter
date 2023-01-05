@@ -325,18 +325,30 @@ jobs:
 #             exit 1
 #       # Here's where you will add some code to rollback on failure  
 
+#***********************************************************************
+
+  configure-infrastructure:
+    docker:
+    - image: cimg/python:3.10
+    steps:
+    - checkout
+    - install_ansible
+    - install_awscli
+    - add_ssh_keys:
+       fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
+    - attach_workspace:
+        at: ~/
+    - run:
+       name: Run Configure Server Ansible play
+       command: |
+         cd .circleci/ansible
+         cat inventory.txt
+
+         ansible-playbook -i inventory.txt configure-server.yml
+    - destroy-environment
 
 
-
-
-
-
-
-
-
-
-
-
+#######***************************######################
 #   run-migrations:
 #     docker:
 #       # Docker image here that supports NodeJS
@@ -468,8 +480,8 @@ workflows:
           filters:
             branches:
               only: [master]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
