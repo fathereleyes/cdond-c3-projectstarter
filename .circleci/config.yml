@@ -9,9 +9,9 @@ commands:
           command: |
               #sudo apt update 
               sudo apt update 
-              sudo apt-get install awscli 
+              #sudo apt-get install awscli 
               sudo apt-get update 
-              sudo  install -y awscli
+              sudo  install  awscli
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               sudo apt-get install zip 
               sudo apt-get install unzip 
