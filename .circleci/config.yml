@@ -333,7 +333,7 @@ jobs:
       - destroy-environment 
 
 #********************************************************************
-#   configure-infrastructure:
+##   configure-infrastructure:
 #     docker:
 #       # Docker image here that supports Ansible
 #     steps:
