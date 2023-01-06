@@ -7,7 +7,7 @@ commands:
       - run: 
           name: Install aws cli 
           command: |
-              sudo apt update 
+              #sudo apt update 
               sudo apt update 
               sudo apt-get install awscli 
               sudo apt-get update 
