@@ -354,25 +354,25 @@ jobs:
 
 #***********************************************************************
 
-  # configure-infrastructure:
-  #   docker:
-  #   - image: cimg/base:stable
-  #   steps:
-  #   - checkout
-  #   - install_ansible
-  #   - install_awscli
-  #   - add_ssh_keys:
-  #      fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
-  #   - attach_workspace:
-  #       at: ~/
-  #   - run:
-  #      name: Run Configure Server Ansible play
-  #      command: |
-  #        cd .circleci/ansible
-  #        cat inventory.txt
+  configure-infrastructure:
+    docker:
+    - image: cimg/base:stable
+    steps:
+    - checkout
+    - install_ansible
+    - install_awscli
+    - add_ssh_keys:
+       fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
+    - attach_workspace:
+        at: ~/
+    - run:
+       name: Run Configure Server Ansible play
+       command: |
+         cd .circleci/ansible
+         cat inventory.txt
 
-  #        ansible-playbook -i inventory.txt configure-server.yml
-  #   - destroy-environment
+         ansible-playbook -i inventory.txt configure-server.yml
+    - destroy-environment
 
 
 #######***************************######################
