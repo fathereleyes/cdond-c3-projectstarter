@@ -19,12 +19,12 @@
         timeout: 600
 
 
-      setup:  
+      # # setup:  
 
-       name: "install python for Ansible."
-      apt:
-        name: python3
-        #update_cache:yes
+      # #  name: "install python for Ansible."
+      # apt:
+      #   name: python3
+      #   #update_cache:yes
     roles:
           - configure-server
           - configure-prometheus-node-exporter
