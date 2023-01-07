@@ -459,7 +459,10 @@ jobs:
               npm install typescript@latest -g
               npm install typescript -g
               npm install --save-dev tsconfig-paths
-
+              sudo apt update && sudo apt install node-typescript -y
+              sudo npm install -g typescript
+              sudo npm install -g typescript@2.9.2
+              sudo npm install -g typescript@latest
               npm run migrations > migrations_dump.txt
         - run: 
               name: send migration status to kvdb.io 
