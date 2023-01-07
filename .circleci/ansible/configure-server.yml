@@ -25,8 +25,8 @@
         #update_cache:yes
 
   # Get the environment variables from CircleCI and add to the EC2 instance
-  # environment:
-  #   - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"
+  environment:
+    - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"
     # Add more env vars here
 
   roles:
@@ -48,7 +48,7 @@
 
 
 
-    
+
 #####################################################
 # ---
 # -  name: "configuration play." 
