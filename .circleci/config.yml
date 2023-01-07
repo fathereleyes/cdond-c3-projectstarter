@@ -36,15 +36,29 @@ commands:
           name: install ansible f
           command: |
               sudo apt update 
-              #sudo apt install software-properties-common 
+              #sudo apt install software-properties-common -y 
               sudo add-apt-repository --yes --update ppa:ansible/ansible
               #sudo apt -y update && apt install -y python3
-              sudo apt install ansible 
+              sudo apt install ansible -y 
+
+ 
+  install_nodejs:
+    description: Install Node.js 13.8.0
+    steps:
+      - run:
+          name: Install Node.js 13.8.0
+          command: |
+            # Install Node.js LTS version as our base Node.js version
+            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            sudo apt install -y nodejs
+
+            # Use n version manager to use Node.js v13.8.0
+            sudo npm install --global n
+            sudo n 13.8.0
 
 
 
 
-              
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -455,8 +469,41 @@ jobs:
 #           name: Deploy frontend objects
 #           command: |
 #             # your code here
-#       # Here's where you will add some code to rollback on failure      
-                    
+#       # Here's where you will add some code to rollback on failure   
+#**************************************************             
+  deploy-frontend:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - install_awscli
+      - install_nodejs
+      - restore_cache:
+          keys: [backend-deps]
+      - run:
+          name: Install dependencies
+          command: |
+            cd frontend
+            npm install
+      - run:
+        name: Get backend url
+        command: |
+          BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text)
+          echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+          cat frontend/.env
+
+      - run:
+        name: Deploy frontend objects
+        command: |
+              cd frontend
+              npm run build
+              aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+      - destroy-environment
+      - revert-migrations
+#***********************************************
 #   deploy-backend:
 #     docker:
 #       # Docker image here that supports Ansible
@@ -554,8 +601,8 @@ workflows:
           requires: [deploy-infrastructure]
       - run-migrations:
           requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #     requires: [run-migrations]
+      - deploy-frontend:
+          requires: [run-migrations]
       # - deploy-backend:
       #     requires: [run-migrations]
       # - smoke-test:
