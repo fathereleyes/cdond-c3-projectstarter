@@ -438,6 +438,8 @@ jobs:
 
               cd backend
               npm install 
+              npm cache clean --force
+              rm -rf node_modules
               npm run migrations > migrations_dump.txt
         - run: 
               name: send migration status to kvdb.io 
