@@ -29,17 +29,17 @@ commands:
   #        command: |
   ## ##          python3 -m pip install --user ansible
 
-  # install_ansible:
-  #   description: install ansible 
-  #   steps:
-  #     - run: 
-  #         name: install ansible f
-  #         command: |
-  #             sudo apt update 
-  #             #sudo apt install software-properties-common -y 
-  #             sudo add-apt-repository --yes --update ppa:ansible/ansible
-  #             #sudo apt -y update && apt install -y python3
-  #             sudo apt install ansible -y 
+  install_ansible:
+    description: install ansible 
+    steps:
+      - run: 
+          name: install ansible f
+          command: |
+              sudo apt update 
+              #sudo apt install software-properties-common -y 
+              sudo add-apt-repository --yes --update ppa:ansible/ansible
+              #sudo apt -y update && apt install -y python3
+              sudo apt install ansible -y 
 
  
   install_nodejs:
