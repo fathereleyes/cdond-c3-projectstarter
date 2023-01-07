@@ -39,6 +39,7 @@ commands:
               #sudo apt install software-properties-common -y 
               sudo add-apt-repository --yes --update ppa:ansible/ansible
               #sudo apt -y update && apt install -y python3
+              sudo apt install -y python3
               sudo apt install ansible -y 
 
  
