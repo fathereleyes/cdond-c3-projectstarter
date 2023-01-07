@@ -99,6 +99,7 @@ commands:
               then
                 cd ~/project/backend
                 npm install
+                npm audit fix
                 ##npm -y install
                 npm run migration:revert
               fi          
