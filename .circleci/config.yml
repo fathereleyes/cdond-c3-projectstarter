@@ -98,7 +98,8 @@ commands:
               if (( $SUCCESS == 1 ));
               then
                 cd ~/project/backend
-                npm install
+                #npm install
+                npm -y install
                 npm run migration:revert
               fi          
 #****************************************************************
