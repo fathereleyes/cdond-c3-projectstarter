@@ -1,6 +1,6 @@
 
 
-  - name: "configuration play." 
+    name: "configuration play." 
     hosts: web
     user: ubuntu
     become: true
@@ -24,7 +24,7 @@
        name: "install python for Ansible."
       apt:
         name: python3
-    #     update_cache:yes
+        #update_cache:yes
     roles:
           - configure-server
           - configure-prometheus-node-exporter
