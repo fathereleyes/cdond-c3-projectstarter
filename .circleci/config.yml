@@ -100,12 +100,6 @@ commands:
                 cd ~/project/backend
                 npm install
                 npm audit fix
-                npm audit fix --force --audit-level=critical
-                npm audit fix --force --audit-level=critical
-                npm audit fix
-                npm audit fix
-                npm audit fix
-   #  #         # npm audit --audit-level=critical
                 ##npm -y install
                 npm run migration:revert
               fi          
@@ -445,7 +439,7 @@ jobs:
               cd backend
               npm install 
               npm cache clean --force
-              rm -rf node_modules
+              
               npm run migrations > migrations_dump.txt
         - run: 
               name: send migration status to kvdb.io 
