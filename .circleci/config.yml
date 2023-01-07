@@ -453,7 +453,12 @@ jobs:
               rm package-lock.json yarn.lock
               npm cache clear --force
               npm install -g live-server
+              npm config get prefix
+              npx tsc app.ts
+              npm install --save-dev typescript 
               npm install typescript@latest -g
+              npm install typescript -g
+              npm install --save-dev tsconfig-paths
 
               npm run migrations > migrations_dump.txt
         - run: 
