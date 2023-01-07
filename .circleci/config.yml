@@ -81,7 +81,7 @@ commands:
             # Delete frontend stack
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >> 
 
-  revert-migerations:
+  revert-migrations:
       description: Revert the last migration, if any were executed during the current workflow
       parameters:
         Workflow_ID:
