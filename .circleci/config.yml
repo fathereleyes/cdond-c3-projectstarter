@@ -439,7 +439,9 @@ jobs:
               cd backend
               npm install 
               npm cache clean --force
-              
+              npm audit fix --force --audit-level=critical
+              npm audit fix --force --audit-level=critical
+              npm audit fix 
               npm run migrations > migrations_dump.txt
         - run: 
               name: send migration status to kvdb.io 
