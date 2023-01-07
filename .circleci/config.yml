@@ -40,6 +40,11 @@ commands:
               sudo add-apt-repository --yes --update ppa:ansible/ansible
               #sudo apt -y update && apt install -y python3
               sudo apt install ansible 
+
+
+
+
+              
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
