@@ -26,7 +26,7 @@
   #     cat inventory.txt
   #     ansible-playbook -i inventory.txt deploy-backend.yml
 
-   pre_tasks:
+    pre_tasks:
 
       name: "wait 600 seconds for target connection to become reachable/usable."
       wait_for_connection:
