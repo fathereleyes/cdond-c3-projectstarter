@@ -61,6 +61,10 @@ commands:
             sudo apt install -y nodejs
             npm run build
             sudo npm install
+            npm install mongodb
+            npm install pg
+            npm init -y
+            
             sudo npm start
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
