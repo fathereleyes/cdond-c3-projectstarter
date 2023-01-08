@@ -496,12 +496,23 @@ jobs:
           command: |
             sudo apt-get update && apt-get install -y apt-utils && apt-get install -y curl
             cd backend
+            sudo npm cache clean --force
             sudo apt-get install -y nodejs
             sudo npm install -g tsc
             sudo npm install -g concurrently
             sudo npm install -g ts-node
             sudo npm install -g typescript
             sudo apt install -y nodejs
+            npm install -g npm-install-peers
+            npm-install-peers
+            npm install -g install-
+            npm install -g npm-install-peers
+            npm install --save-dev @xxxxx/xxxxx@latest
+            npm install -g npm-install-peers
+            npm install npm -g
+            npm install --save-dev @angular/cli@latest
+            npm install
+            npm start
             npm run build
             sudo npm install
             npm install mongodb
