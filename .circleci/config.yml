@@ -439,6 +439,29 @@ jobs:
 #      # Here's where you will add some code to rollback on failure   
 
 #************************************************************************
+
+  run-migrations:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - install_awscli
+      - run:
+          name: Run migrations
+          command: |
+              cd backend-
+              npm install
+              npm run migrations > migrations_dump.txt
+      - run:
+          name: Send migration status to kvdb.io
+          command: |
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+              curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            fi
+      #- destroy-environment
+      #- revert-migrations
+#--------------------------------------------
   # run-migrations:
   #     docker:
   #       - image: cimg/node:13.8.0
@@ -449,32 +472,11 @@ jobs:
   #           name: run migrations
   #           command: |
 
-  #             cd backend
+  #             cd backend-
   #             npm install 
   #             npm cache clean --force
-  #             npm audit fix --force --audit-level=critical
-  #             npm audit fix --force --audit-level=critical
-  #             npm audit fix 
-  #             npm  run build -prod
-  #             npm run clean
-  #             npm cache clean --force
-  #             rm -rf node_modules
-  #             npm install -g live-server
-  #             rm package-lock.json yarn.lock
-  #             npm cache clear --force
-  #             npm install -g live-server
-  #             npm config get prefix
-  #             npx tsc app.ts
-  #             chmod -R a+rwx ./node_modules
-  #             npm install --save-dev typescript 
-  #             npm install typescript@latest -g
-  #             npm install typescript -g
-  #             npm install --save-dev tsconfig-paths
-  #             sudo npm install -g typescript
-  #             sudo npm install -g typescript@2.9.2
-  #             sudo npm install -g typescript@latest
-  #             npm run migrations > migrations_dump.txt
-  #             rm -rf node_modules && rm ./package-lock.json && npm install
+  #            
+  #   
   #       - run: 
   #             name: send migration status to kvdb.io 
   #             command: 
@@ -482,53 +484,53 @@ jobs:
   #               then 
   #                 curl  https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
   #               fi 
-       # - destroy-environment
-        #- revert-migrations 
+      #  - destroy-environment
+      #   - revert-migrations 
 #=========== ===== ========== ========================================
-  run-migrations:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - install_awscli
-      - run:
-          name: Run migrations
-          command: |
-            sudo apt-get update && apt-get install -y apt-utils && apt-get install -y curl
-            cd backend
-            sudo npm cache clean --force
-            sudo apt-get install -y nodejs
-            sudo npm install -g tsc
-            sudo npm install -g concurrently
-            sudo npm install -g ts-node
-            sudo npm install -g typescript
-            sudo apt install -y nodejs
-            npm install -g npm-install-peers
-            npm-install-peers
-            npm install -g install-
-            npm install -g npm-install-peers
-            npm install --save-dev @xxxxx/xxxxx@latest
-            npm install -g npm-install-peers
-            npm install npm -g
-            npm install --save-dev @angular/cli@latest
-            npm install
-            npm start
-            npm run build
-            sudo npm install
-            npm install mongodb
-            npm install pg
-            npm init -y
-            sudo npm start
-            npm run migrations > migrations_dump.txt
-      - run:
-          name: Send migration status to kvdb.io
-          command: |
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-            then
-              curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-            fi
-      #- destroy-environment
-      - revert-migrations
+  # run-migrations:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - install_awscli
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           sudo apt-get update && apt-get install -y apt-utils && apt-get install -y curl
+  #           cd backend
+  #           sudo npm cache clean --force
+  #           sudo apt-get install -y nodejs
+  #           sudo npm install -g tsc
+  #           sudo npm install -g concurrently
+  #           sudo npm install -g ts-node
+  #           sudo npm install -g typescript
+  #           sudo apt install -y nodejs
+  #           npm install -g npm-install-peers
+  #           npm-install-peers
+  #           npm install -g install-
+  #           npm install -g npm-install-peers
+  #           npm install --save-dev @xxxxx/xxxxx@latest
+  #           npm install -g npm-install-peers
+  #           npm install npm -g
+  #           npm install --save-dev @angular/cli@latest
+  #           npm install
+  #           npm start
+  #           npm run build
+  #           sudo npm install
+  #           npm install mongodb
+  #           npm install pg
+  #           npm init -y
+  #           sudo npm start
+  #           npm run migrations > migrations_dump.txt
+  #     - run:
+  #         name: Send migration status to kvdb.io
+  #         command: |
+  #           if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+  #           then
+  #             curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+  #           fi
+  #     #- destroy-environment
+  #     #- revert-migrations
 
 
 
@@ -716,25 +718,25 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-         requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      # - deploy-infrastructure:
+      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     filters:
+      #       branches:
+      #         only: [master]
+      # - configure-infrastructure:
+      #    requires: [deploy-infrastructure]
+      - run-migrations
+          #requires: [configure-infrastructure]
       # - deploy-frontend:
       #     requires: [run-migrations]
       # - deploy-backend:
