@@ -441,6 +441,7 @@ jobs:
             command: |
 
               cd backend
+              npm run clean
               npm install 
               npm cache clean --force
               npm audit fix --force --audit-level=critical
@@ -448,22 +449,23 @@ jobs:
               npm audit fix 
               npm  run build -prod
               npm cache clean --force
-              npm install -g live-server
               rm -rf node_modules
+              npm install -g live-server
               rm package-lock.json yarn.lock
               npm cache clear --force
               npm install -g live-server
               npm config get prefix
               npx tsc app.ts
+              chmod -R a+rwx ./node_modules
               npm install --save-dev typescript 
               npm install typescript@latest -g
               npm install typescript -g
               npm install --save-dev tsconfig-paths
-              sudo apt update && sudo apt install node-typescript -y
               sudo npm install -g typescript
               sudo npm install -g typescript@2.9.2
               sudo npm install -g typescript@latest
               npm run migrations > migrations_dump.txt
+              rm -rf node_modules && rm ./package-lock.json && npm install
         - run: 
               name: send migration status to kvdb.io 
               command: 
