@@ -494,6 +494,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
+            sudo apt-get update && apt-get install -y apt-utils && apt-get install -y curl
             cd backend
             sudo apt-get install -y nodejs
             sudo npm install -g tsc
