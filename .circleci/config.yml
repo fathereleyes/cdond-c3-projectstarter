@@ -56,7 +56,7 @@ commands:
             sudo apt-get install -y nodejs
             npm install -g typescript
             sudo apt install -y nodejs
-
+            npm start
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
             sudo n 13.8.0
