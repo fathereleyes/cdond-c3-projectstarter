@@ -83,26 +83,26 @@ commands:
   #           sudo n 13.8.0
 
 
-  # destroy-environment:
-  #   description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-  #   parameters:
-  #     Workflow_ID:
-  #       type: string
-  #       default: ${CIRCLE_WORKFLOW_ID:0:7}
-  #   steps:
-  #     - run:
-  #         name: Destroy environments
-  #         when: on_fail
-  #         command: |
+  destroy-environment:
+    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    parameters:
+      Workflow_ID:
+        type: string
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
+    steps:
+      - run:
+          name: Destroy environments
+          when: on_fail
+          command: |
 
-  #           # Delete backend stack
-  #           aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >> 
+            # Delete backend stack
+            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >> 
             
-  #           ## Empty frontend bucket
-  #           aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
+            ## Empty frontend bucket
+            aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
 
-  #           # Delete frontend stack
-  #           aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >> 
+            # Delete frontend stack
+            aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >> 
 
   revert-migrations:
       description: Revert the last migration, if any were executed during the current workflow
@@ -123,7 +123,7 @@ commands:
                 cd ~/project/backend
                 npm install
                 npm audit fix
-                ##npm -y install
+                npm -y install
                 npm run migration:revert
               fi          
 #****************************************************************
@@ -383,7 +383,7 @@ jobs:
             root: ~/
             paths:
               - project/.circleci/ansible/inventory.txt   
-     # - destroy-environment 
+      - destroy-environment 
 
 #********************************************************************
 ##   configure-infrastructure:
@@ -427,7 +427,7 @@ jobs:
          cat inventory.txt
 
          ansible-playbook -i inventory.txt configure-server.yml
-   # - destroy-environment
+    - destroy-environment
 
 
 #######***************************######################
@@ -466,8 +466,8 @@ jobs:
           command: |
             cd backend 
             sudo npm install -g @angular/cli
-            sudo chown -R $USER /usr/local/lib/node_modules
-            
+            #sudo chown -R $USER /usr/local/lib/node_modules
+
             # sudo npm install -g ts-node
             # npm install -g typescript
             # npm install -g npm-install-peers
@@ -494,8 +494,8 @@ jobs:
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-      #- destroy-environment
-      #- revert-migrations
+      - destroy-environment
+      - revert-migrations
 
 
 
