@@ -467,7 +467,16 @@ jobs:
             cd backend
             sudo npm install -g ts-node
             npm install -g typescript
+            npm install -g npm-install-peers
+            sudo npm install -g @angular/cli
+            sudo apt install nodejs 
+            sudo apt install npm 
+            sudo npm install -g npm@latest
+            sudo npm install -g @angular/cli
+            ng --version
             npm install
+            
+            sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
