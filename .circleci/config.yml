@@ -54,9 +54,13 @@ commands:
             sudo apt install -y 
             curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            npm install -g typescript
+            sudo npm install -g tsc
+            sudo npm install -g concurrently
+            sudo npm install -g typescript
+            sudo npm install -g typescript
             sudo apt install -y nodejs
-            npm start
+            sudo npm install
+            sudo npm start
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
             sudo n 13.8.0
