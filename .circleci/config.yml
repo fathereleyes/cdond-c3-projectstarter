@@ -475,9 +475,9 @@ jobs:
             sudo npm install -g @angular/cli
             ng --version
             npm install
-            # sudo chown -R $USER /usr/local/lib/node_modules
-            # sudo chown -R $USER /usr/local
-            # sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+            sudo chown -R $USER /usr/local/lib/node_modules
+            sudo chown -R $USER /usr/local
+            sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
