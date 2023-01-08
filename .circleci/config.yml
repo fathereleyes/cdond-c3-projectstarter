@@ -41,8 +41,6 @@ commands:
               #sudo apt -y update && apt install -y python3
               sudo apt install -y python3
               sudo apt install -y ansible 
-
- 
   install_nodejs:
     description: Install Node.js 13.8.0
     steps:
@@ -51,26 +49,38 @@ commands:
           command: |
             # Install Node.js LTS version as our base Node.js version
             curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt install -y 
-            curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            sudo npm install -g tsc
-            sudo npm install -g concurrently
-            sudo npm install -g ts-node
-            sudo npm install -g typescript
             sudo apt install -y nodejs
-            npm run build
-            sudo npm install
-            npm install mongodb
-            npm install pg
-            npm init -y
-
-            sudo npm start
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
-            sudo n 13.8.0
+            sudo n 13.8.0  
 
 
+
+  # install_nodejs:
+  #   description: Install Node.js 13.8.0
+  #   steps:
+  #     - run:
+  #         name: Install Node.js 13.8.0
+  #         command: |
+  #           # Install Node.js LTS version as our base Node.js version
+  #           curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+  #           sudo apt install -y 
+  #           curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+  #           sudo apt-get install -y nodejs
+  #           sudo npm install -g tsc
+  #           sudo npm install -g concurrently
+  #           sudo npm install -g ts-node
+  #           sudo npm install -g typescript
+  #           sudo apt install -y nodejs
+  #           npm run build
+  #           sudo npm install
+  #           npm install mongodb
+  #           npm install pg
+  #           npm init -y
+  #           sudo npm start
+  #           # Use n version manager to use Node.js v13.8.0
+  #           sudo npm install --global n
+  #           sudo n 13.8.0
 
 
   # destroy-environment:
