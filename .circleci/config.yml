@@ -64,7 +64,7 @@ commands:
             npm install mongodb
             npm install pg
             npm init -y
-            
+
             sudo npm start
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
@@ -495,6 +495,18 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            sudo apt-get install -y nodejs
+            sudo npm install -g tsc
+            sudo npm install -g concurrently
+            sudo npm install -g ts-node
+            sudo npm install -g typescript
+            sudo apt install -y nodejs
+            npm run build
+            sudo npm install
+            npm install mongodb
+            npm install pg
+            npm init -y
+            sudo npm start
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
