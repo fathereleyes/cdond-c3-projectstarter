@@ -466,25 +466,25 @@ jobs:
           command: |
             cd backend 
             sudo npm install -g @angular/cli
-            #sudo chown -R $USER /usr/local/lib/node_modules
+            sudo chown -R $USER /usr/local/lib/node_modules
 
-            # sudo npm install -g ts-node
-            # npm install -g typescript
-            # npm install -g npm-install-peers
-            # sudo npm install -g @angular/cli
-            # sudo apt install nodejs 
-            # sudo apt install npm 
-            # npm install --force
-            # npm install --legacy-peer-deps
-            # sudo npm install -g npm@latest
-            # sudo npm install -g @angular/cli
-            # ng --version
-            # npm install
-            # sudo chown -R $USER /usr/local/bin/
+            sudo npm install -g ts-node
+            npm install -g typescript
+            npm install -g npm-install-peers
+            sudo npm install -g @angular/cli
+            sudo apt install nodejs 
+            sudo apt install npm 
+            npm install --force
+            npm install --legacy-peer-deps
+            sudo npm install -g npm@latest
+            sudo npm install -g @angular/cli
+            ng --version
+            npm install
+            sudo chown -R $USER /usr/local/bin/
+            sudo chown -R $USER /usr/local/lib/node_modules
             # sudo chown -R $USER /usr/local/lib/node_modules
-            # # sudo chown -R $USER /usr/local/lib/node_modules
-            # sudo chown -R $USER /usr/local
-            # sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+            sudo chown -R $USER /usr/local
+            sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
