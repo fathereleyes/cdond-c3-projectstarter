@@ -457,12 +457,21 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
+      - install_tsc
+      - install_ts-node
       - restore_cache:
          keys: [backend-deps]
       - run:
           name: Run migrations
           command: |
             cd backend
+            sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
+            sudo chown -R circleci /usr/local/lib/node_modules/typescript
+            sudo chown -R circleci /usr/local/lib/node_modules
+            sudo chown -R circleci /usr/local/bin
+            sudo chown -R circleci /usr/local/bin/tsc
+            sudo npm install -g ts-node
+            npm install -g typescript
             npm install
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
