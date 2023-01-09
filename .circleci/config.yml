@@ -453,17 +453,17 @@ jobs:
 #************************************************************************
 
   run-migrations:
-    # docker:
-    #   - image: cimg/node:13.8.0
-    # steps:
-    #   - checkout
-    #   - install_awscli
-    #   - install_nodejs
-      # - install_tsc
-      # - install_ts-node
-      # - restore_cache:
-      #    keys: [backend-deps]
-      # - run:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - install_awscli
+      - install_nodejs
+      - install_tsc
+      - install_ts-node
+      - restore_cache:
+         keys: [backend-deps]
+      - run:
           name: Run migrations
           command: |
             cd backend 
@@ -484,13 +484,13 @@ jobs:
             # # sudo chmod -R 777 /usr/local/lib/node_modules
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
-          # - run:
-          #     name: Send migration status to kvdb.io
-          #     command: |
-          #       if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-          #       then
-          #         curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-          #       fi
+      - run:
+          name: Send migration status to kvdb.io
+          command: |
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+              curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            fi
 #- destroy-environment
      # - revert-migrations
 
