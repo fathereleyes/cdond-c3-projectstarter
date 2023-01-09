@@ -465,23 +465,24 @@ jobs:
           name: Run migrations
           command: |
             cd backend 
-            sudo chown -R $(whoami) ~/.npm
-            sudo chown -R $(whoami) /usr/local/lib/node_modules/
-            # sudo npm install -g @angular/cli
+
+             sudo npm install -g @angular/cli
             # #sudo chown -R $USER /usr/local/lib/node_modules
-            # sudo npm install -g ts-node
-            # npm install -g typescript
-            # npm install -g npm-install-peers
-            # sudo npm install -g @angular/cli
-            # sudo apt install nodejs 
-            # sudo apt install npm 
-            # npm install --force
-            # npm install --legacy-peer-deps
-            # sudo npm install -g npm@latest
-            # sudo npm install -g @angular/cli
+             sudo npm install -g ts-node
+             npm install -g typescript
+             npm install -g npm-install-peers
+             sudo npm install -g @angular/cli
+             sudo apt install nodejs 
+             sudo apt install npm 
+             npm install --force
+             npm install --legacy-peer-deps
+             sudo npm install -g npm@latest
+             sudo npm install -g @angular/cli
             # ng --version 
             # npm install 
-            # sudo npm install -g appium --unsafe-perm=true --allow-root
+             sudo npm install -g appium --unsafe-perm=true --allow-root
+            sudo chown -R $(whoami) ~/.npm
+            sudo chown -R $(whoami) /usr/local/lib/node_modules/
             # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
             # # sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
             # # sudo chown -R circleci /usr/local/lib/node_modules/typescript
