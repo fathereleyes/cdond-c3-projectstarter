@@ -464,7 +464,8 @@ jobs:
           name: Run migrations
           command: |
             
-            sudo npm install
+            sudo npm install 
+            npm install -g typescript 
             cd backend
             sudo npm run migrations > migrations_dump.
       - run:
