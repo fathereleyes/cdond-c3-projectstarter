@@ -239,6 +239,9 @@ jobs:
           name: Back-end build
           command: |
             cd backend
+            sudo npm cache clean -f
+            sudo npm install -g n install n
+            sudo n stable upgrade 
             sudo npm install --only=prod
             sudo npm install --production
             sudo npm install typescript -g
