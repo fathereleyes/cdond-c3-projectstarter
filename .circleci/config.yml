@@ -469,9 +469,9 @@ jobs:
              sudo npm install -g @angular/cli
             # #sudo chown -R $USER /usr/local/lib/node_modules
              sudo npm install -g ts-node
-             npm install -g typescript
-             npm install -g npm-install-peers
-             
+             sudo npm install -g typescript
+             sudo npm install -g npm-install-peers
+             sudo npm install -g npm@9.2.0
              sudo npm install -g @angular/cli
              sudo apt install nodejs 
              sudo apt install npm 
