@@ -465,7 +465,7 @@ jobs:
           command: |
             cd backend
             sudo npm install 
-            sudo  install @types/jasmine
+            #sudo  install @types/jasmine
             sudo npm install "concurrently"
             sudo npm install "lite-server"
 
