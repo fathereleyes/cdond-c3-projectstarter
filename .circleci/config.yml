@@ -239,17 +239,17 @@ jobs:
           name: Back-end build
           command: |
             sudo sudo apt-get update -y 
-            sudo apt purge snapd -y 
-            sudo apt update -y 
-            sudo apt list --upgradable -y 
-            sudo apt install update-manager-core -y 
-            sudo do-release-upgrade -y 
-            sudo apt upgrade -y
-            sudo apt-get install libc6 -y 
+            sudo apt purge snapd 
+            sudo apt update
+            sudo apt list --upgradable 
+            sudo apt install update-manager-core 
+            sudo do-release-upgrade 
+            sudo apt upgrade 
+            sudo apt-get install libc6 
             cd backend
             sudo npm cache clean -f
             sudo npm install -g n install n
-            sudo npm stable upgrade -y 
+            sudo npm stable upgrade  
             sudo npm install --only=prod
             sudo npm install --production
             sudo npm install typescript -g
