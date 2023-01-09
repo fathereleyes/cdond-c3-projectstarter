@@ -453,35 +453,35 @@ jobs:
 #************************************************************************
 
   run-migrations:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
+    # docker:
+    #   - image: cimg/node:13.8.0
+    # steps:
+    #   - checkout
+    #   - install_awscli
+    #   - install_nodejs
       # - install_tsc
       # - install_ts-node
-      - restore_cache:
-         keys: [backend-deps]
-      - run:
+      # - restore_cache:
+      #    keys: [backend-deps]
+      # - run:
           name: Run migrations
           command: |
             cd backend 
-            sudo rm -rf node_modules
-            sudo rm -rf package-lock.json
-            sudo rm -rf yarn.lock
-            sudo rm -rf ~/.npm
+            # sudo rm -rf node_modules
+            # sudo rm -rf package-lock.json
+            # sudo rm -rf yarn.lock
+            # sudo rm -rf ~/.npm
             sudo npm install
-            sudo npm init -y
-            sudo npm install -g typescript
-            sudo npm install -g @angular/cli          
-            sudo npm install -g ts-node
-            sudo npm install -g typescript
-            sudo npm install -g npm-install-peers
-            sudo npm install -g @angular/cli
-            # sudo chown -R $(whoami) /usr/local/lib/
-            # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-            # sudo chmod -R 777 /usr/local/lib/node_modules
+            # sudo npm init -y
+            # sudo npm install -g typescript
+            # sudo npm install -g @angular/cli          
+            # sudo npm install -g ts-node
+            # sudo npm install -g typescript
+            # sudo npm install -g npm-install-peers
+            # sudo npm install -g @angular/cli
+            # # sudo chown -R $(whoami) /usr/local/lib/
+            # # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+            # # sudo chmod -R 777 /usr/local/lib/node_modules
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
