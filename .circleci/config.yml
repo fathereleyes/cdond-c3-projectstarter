@@ -239,7 +239,7 @@ jobs:
           name: Back-end build
           command: |
             sudo sudo apt-get update -y 
-            sudo apt purge snapd
+            sudo apt purge snapd -y 
             sudo apt update -y 
             sudo apt list --upgradable -y 
             sudo apt install update-manager-core -y 
