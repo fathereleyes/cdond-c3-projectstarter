@@ -238,6 +238,8 @@ jobs:
       - run:
           name: Back-end build
           command: |
+            sudo sudo apt-get update
+            sudo sudo apt-get install libc6
             cd backend
             sudo npm cache clean -f
             sudo npm install -g n install n
@@ -252,8 +254,7 @@ jobs:
             sudo npm install @types/jasmine
             sudo npm install "concurrently"
             sudo npm install "lite-server"
-            sudo sudo apt-get update
-            sudo sudo apt-get install libc6
+
             sudo apt-get remove nodejs
             sudo nvm install 16.15.1
            # sudo npm  start
