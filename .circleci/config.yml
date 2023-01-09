@@ -252,6 +252,9 @@ jobs:
             sudo npm install @types/jasmine
             sudo npm install "concurrently"
             sudo npm install "lite-server"
+            sudo   nvm install 16
+            sudo nvm use 16
+
            # sudo npm  start
 
 
