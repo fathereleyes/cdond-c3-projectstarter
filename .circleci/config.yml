@@ -277,9 +277,9 @@ jobs:
           name: Back-end unit-test
           command: |
             cd backend
-            npm install 
-            npm install -g jest
-            npm run test
+            sudo npm install 
+            sudo npm install -g jest
+            sudo npm run test
 #***********************************
             
 #   scan-frontend:
