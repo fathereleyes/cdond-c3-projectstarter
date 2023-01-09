@@ -29,8 +29,11 @@ commands:
       - run: 
           name: Install aws cli 
           command: |
-            sudo npm install
             sudo npm install -g node-modules
+            sudo npm run build
+            sudo npm i -g npm 
+            sudo   npm run build -prod
+            sudo npm install 
 
 
 
