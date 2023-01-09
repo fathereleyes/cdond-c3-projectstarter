@@ -467,9 +467,11 @@ jobs:
           name: Run migrations
           command: |
             cd backend 
+            sudo rm -rf ~/.npm
             sudo npm install
             sudo npm install -g typescript
             sudo npm install -g @angular/cli
+            
             #sudo chown -R $USER /usr/local/lib/node_modules
             sudo npm install -g ts-node
             sudo npm install -g typescript
@@ -485,7 +487,7 @@ jobs:
             # #ng --version 
             # npm install 
             #sudo npm install -g appium --unsafe-perm=true --allow-root
-            ## sudo chown -R $(whoami) ~/.npm
+             
              sudo chown -R $(whoami) /usr/local/lib/
              sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
             sudo chmod -R 777 /usr/local/lib/node_modules
