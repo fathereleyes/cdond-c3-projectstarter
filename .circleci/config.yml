@@ -468,7 +468,7 @@ jobs:
             sudo npm install -g npm@latest
             sudo npm cache clean --force
             sudo npm rm -rf node_modules && rm package-lock.json
-            sudo npm install 
+            #sudo npm install 
             sudo npm start 
             cd backend
             sudo npm run migrations > migrations_dump.
