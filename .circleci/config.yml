@@ -472,6 +472,7 @@ jobs:
             sudo rm -rf yarn.lock
             sudo rm -rf ~/.npm
             sudo npm install
+            sudo npm init -y
             sudo npm install -g typescript
             sudo npm install -g @angular/cli          
             sudo npm install -g ts-node
