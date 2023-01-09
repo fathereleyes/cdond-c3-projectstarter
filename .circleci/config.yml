@@ -252,9 +252,8 @@ jobs:
             sudo npm install @types/jasmine
             sudo npm install "concurrently"
             sudo npm install "lite-server"
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            . ~/.nvm/nvm.sh
-            nvm install --lts
+            sudo sudo apt-get update
+            sudo sudo apt-get install libc6
            # sudo npm  start
 
 
