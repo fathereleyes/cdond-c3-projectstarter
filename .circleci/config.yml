@@ -243,8 +243,8 @@ jobs:
             #sudo apt update
             #sudo apt list --upgradable 
             sudo apt install update-manager-core 
-            sudo do-release-upgrade 
-            sudo apt upgrade 
+            # sudo do-release-upgrade 
+            # sudo apt upgrade 
             sudo apt-get install libc6 
             cd backend
             sudo npm cache clean -f
