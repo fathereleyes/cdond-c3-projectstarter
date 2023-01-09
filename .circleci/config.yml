@@ -249,7 +249,7 @@ jobs:
             cd backend
             sudo npm cache clean -f
             sudo npm install -g n install n
-            sudo n stable upgrade 
+            sudo npm stable upgrade -y 
             sudo npm install --only=prod
             sudo npm install --production
             sudo npm install typescript -g
