@@ -225,7 +225,9 @@ jobs:
             sudo npm install --only=prod
             sudo npm install --production
             sudo npm install typescript -g
-            #sudo npm install 
+            sudo npm cache clean --force
+            sudo rm -rf node_modules package-lock.json
+            sudo npm install 
             sudo npm run build
               
       - save_cache:
