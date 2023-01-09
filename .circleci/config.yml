@@ -459,8 +459,8 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - install_tsc
-      - install_ts-node
+      # - install_tsc
+      # - install_ts-node
       - restore_cache:
          keys: [backend-deps]
       - run:
