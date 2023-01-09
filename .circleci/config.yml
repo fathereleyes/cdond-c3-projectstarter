@@ -254,6 +254,8 @@ jobs:
             sudo npm install "lite-server"
             sudo sudo apt-get update
             sudo sudo apt-get install libc6
+            sudo apt-get remove nodejs
+            sudo nvm install 16.15.1
            # sudo npm  start
 
 
