@@ -464,9 +464,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install -g npm@
-            sudo npm update -g npm
-            sudo rm -rf node_modules
+            sudo npm install f
             sudo npm run migrations > migrations_dump.
       - run:
           name: Send migration status to kvdb.io
