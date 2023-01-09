@@ -484,7 +484,7 @@ jobs:
             sudo chown -R $(whoami) ~/.npm
             sudo chown -R $(whoami) /usr/local/lib/node_modules/
             # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-            # # sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
+            # ## sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
             # # sudo chown -R circleci /usr/local/lib/node_modules/typescript
             # # sudo chown -R circleci /usr/local/lib/node_modules
             # # sudo chown -R circleci /usr/local/bin
