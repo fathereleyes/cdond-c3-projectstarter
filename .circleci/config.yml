@@ -239,7 +239,7 @@ jobs:
           name: Back-end build
           command: |
             sudo sudo apt-get update -y 
-            sudo sudo apt-get install -y libc6
+            sudo apt-get install -y libc6
             cd backend
             sudo npm cache clean -f
             sudo npm install -g n install n
