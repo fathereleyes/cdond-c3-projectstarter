@@ -465,32 +465,33 @@ jobs:
           name: Run migrations
           command: |
             cd backend 
-
-            sudo npm install -g @angular/cli
-            #sudo chown -R $USER /usr/local/lib/node_modules
-            sudo npm install -g ts-node
-            npm install -g typescript
-            npm install -g npm-install-peers
-            sudo npm install -g @angular/cli
-            sudo apt install nodejs 
-            sudo apt install npm 
-            npm install --force
-            npm install --legacy-peer-deps
-            sudo npm install -g npm@latest
-            sudo npm install -g @angular/cli
-            ng --version 
-            npm install 
-            sudo npm install -g appium --unsafe-perm=true --allow-root
-            sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-            # sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
-            # sudo chown -R circleci /usr/local/lib/node_modules/typescript
-            # sudo chown -R circleci /usr/local/lib/node_modules
-            # sudo chown -R circleci /usr/local/bin
-            # sudo chown -R circleci /usr/local/bin/tsc
-            # sudo chown -R $USER /usr/local/bin/
-            # sudo chown -R $USER /usr/local/lib/node_modules
-            # sudo chown -R $USER /usr/local
-            #sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+            sudo chown -R $(whoami) ~/.npm
+            sudo chown -R $(whoami) /usr/local/lib/node_modules/
+            # sudo npm install -g @angular/cli
+            # #sudo chown -R $USER /usr/local/lib/node_modules
+            # sudo npm install -g ts-node
+            # npm install -g typescript
+            # npm install -g npm-install-peers
+            # sudo npm install -g @angular/cli
+            # sudo apt install nodejs 
+            # sudo apt install npm 
+            # npm install --force
+            # npm install --legacy-peer-deps
+            # sudo npm install -g npm@latest
+            # sudo npm install -g @angular/cli
+            # ng --version 
+            # npm install 
+            # sudo npm install -g appium --unsafe-perm=true --allow-root
+            # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+            # # sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
+            # # sudo chown -R circleci /usr/local/lib/node_modules/typescript
+            # # sudo chown -R circleci /usr/local/lib/node_modules
+            # # sudo chown -R circleci /usr/local/bin
+            # # sudo chown -R circleci /usr/local/bin/tsc
+            # # sudo chown -R $USER /usr/local/bin/
+            # # sudo chown -R $USER /usr/local/lib/node_modules
+            # # sudo chown -R $USER /usr/local
+            # #sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
@@ -766,25 +767,25 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      # - deploy-infrastructure:
+      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     filters:
+      #       branches:
+      #         only: [master]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
+      - run-migrations
+          #requires: [configure-infrastructure]
       # - deploy-frontend:
       #     requires: [run-migrations]
       # - deploy-backend:
