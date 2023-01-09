@@ -490,7 +490,7 @@ jobs:
              sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
             sudo chmod -R 777 /usr/local/lib/node_modules
             # ## sudo chown -R ubuntu  /usr/local/lib/node_modules/ts-node
-            # # sudo chown -R ubuntu /usr/local/lib/node_modules/typescript
+            ## # sudo chown -R ubuntu /usr/local/lib/node_modules/typescript
             # # sudo chown -R ubuntu /usr/local/lib/node_modules
             #sudo chown -R ubuntu /usr/local/bin
             # # sudo chown -R ubuntu /usr/local/bin/tsc
