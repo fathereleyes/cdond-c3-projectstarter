@@ -486,9 +486,9 @@ jobs:
             sudo chown -R circleci /usr/local/lib/node_modules
             sudo chown -R circleci /usr/local/bin
             sudo chown -R circleci /usr/local/bin/tsc
-            # sudo chown -R $USER /usr/local/bin/
-             #sudo chown -R $USER /usr/local/lib/node_modules
-            # sudo chown -R $USER /usr/local
+            sudo chown -R $USER /usr/local/bin/
+            sudo chown -R $USER /usr/local/lib/node_modules
+            sudo chown -R $USER /usr/local
             #sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
