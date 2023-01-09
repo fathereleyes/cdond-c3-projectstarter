@@ -464,11 +464,11 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            sudo npm install typescript -g
             sudo npm install 
-            #sudo  install @types/jasmine
-            sudo npm install "concurrently"
-            sudo npm install "lite-server"
+            sudo npm run build
 
+        
             sudo npm run migrations > migrations_dump.
       - run:
           name: Send migration status to kvdb.io
