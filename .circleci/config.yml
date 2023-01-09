@@ -246,7 +246,13 @@ jobs:
             sudo rm -rf node_modules package-lock.json
             sudo npm install 
             sudo npm run build
-      - install_nodemodules      
+            sudo npm install @types/jasmine
+            sudo npm install "concurrently"
+            sudo npm install "lite-server"
+           # sudo npm  start
+
+
+      #- install_nodemodules      
               
       - save_cache:
           paths: [backend/node_modules]
