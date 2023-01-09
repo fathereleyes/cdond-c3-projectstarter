@@ -480,15 +480,15 @@ jobs:
             sudo npm install -g @angular/cli
             ng --version 
             npm install 
-
-            sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
-            sudo chown -R circleci /usr/local/lib/node_modules/typescript
-            sudo chown -R circleci /usr/local/lib/node_modules
-            sudo chown -R circleci /usr/local/bin
-            sudo chown -R circleci /usr/local/bin/tsc
-            sudo chown -R $USER /usr/local/bin/
-            sudo chown -R $USER /usr/local/lib/node_modules
-            sudo chown -R $USER /usr/local
+            sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+            # sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
+            # sudo chown -R circleci /usr/local/lib/node_modules/typescript
+            # sudo chown -R circleci /usr/local/lib/node_modules
+            # sudo chown -R circleci /usr/local/bin
+            # sudo chown -R circleci /usr/local/bin/tsc
+            # sudo chown -R $USER /usr/local/bin/
+            # sudo chown -R $USER /usr/local/lib/node_modules
+            # sudo chown -R $USER /usr/local
             #sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
