@@ -478,7 +478,7 @@ jobs:
              npm install --legacy-peer-deps
              sudo npm install -g npm@latest
              sudo npm install -g @angular/cli
-            # ng --version 
+            # #ng --version 
             # npm install 
             sudo npm install -g appium --unsafe-perm=true --allow-root
             sudo chown -R $(whoami) ~/.npm
