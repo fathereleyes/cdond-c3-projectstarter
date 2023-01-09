@@ -464,7 +464,8 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install -g npm@latest
+            sudo npm install -g npm@
+            sudo npm update -g npm
             sudo rm -rf node_modules
             sudo npm run migrations > migrations_dump.
       - run:
