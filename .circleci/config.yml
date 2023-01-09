@@ -241,11 +241,11 @@ jobs:
             sudo sudo apt-get update -y 
             sudo apt purge snapd
             sudo apt update -y 
-            sudo apt list --upgradable
-            sudo apt install update-manager-core
-            sudo do-release-upgrade
+            sudo apt list --upgradable -y 
+            sudo apt install update-manager-core -y 
+            sudo do-release-upgrade -y 
             sudo apt upgrade -y
-            sudo apt-get install -y libc6
+            sudo apt-get install libc6 -y 
             cd backend
             sudo npm cache clean -f
             sudo npm install -g n install n
