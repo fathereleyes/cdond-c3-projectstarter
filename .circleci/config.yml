@@ -262,7 +262,7 @@ jobs:
             sudo npm install "lite-server"
             sudo apt-get remove nodejs
             sudo nvm install 16.15.1
-           # sudo npm  start
+            # sudo npm  start
 
 
       #- install_nodemodules      
