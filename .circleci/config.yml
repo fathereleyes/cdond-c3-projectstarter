@@ -467,10 +467,9 @@ jobs:
           name: Run migrations
           command: |
             cd backend 
-            rm -rf node_modules
-            rm -rf package-lock.json
-            rm -rf yarn.lock
-            npm install
+            sudo rm -rf node_modules
+            sudo rm -rf package-lock.json
+            sudo rm -rf yarn.lock
             sudo rm -rf ~/.npm
             sudo npm install
             sudo npm install -g typescript
