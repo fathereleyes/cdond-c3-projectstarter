@@ -322,8 +322,18 @@ jobs:
             # sudo apt upgrade 
             sudo apt-get install libc6 
             cd backend 
-            npm install --save ioredis@4.28.5
-            npm install --save-dev @types/ioredis@4.28.10
+            # Locally in your project.
+            sudo  npm install -D typescript
+            sudo  npm install -D ts-node
+
+            # Or globally with TypeScript.
+            sudo npm install -g typescript
+            sudo npm install -g ts-node
+
+            # Depending on configuration, you may also need these
+            sudo npm install -D tslib @types/node
+            sudo npm install --save ioredis@4.28.5
+            sudo npm install --save-dev @types/ioredis@4.28.10
             sudo npm install 
             sudo npm install -g jest
             sudo npm run test
