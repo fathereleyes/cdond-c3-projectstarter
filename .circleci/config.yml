@@ -562,10 +562,11 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install
-            sudo npm run build
-            sudo npm install typescript -g
+             npm install
+             npm run build
+             npm install typescript -g
             npm run migrations > migrations_dump.txt
+            cat migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
           command: |
