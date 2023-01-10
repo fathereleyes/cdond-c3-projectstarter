@@ -561,6 +561,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
+            npm install -g yarn
             sudo apt install rsync grsync -y 
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
@@ -573,6 +574,7 @@ jobs:
             sudo n latest
             sudo run npm install
             sudo run npm start
+            sudo npm install -g yarn
             sudo npm audit fix --force
             sudo npm audit fix --force
             sudo npm install @abandonware/noble@1.9.2-1 --no-save --no-package-lock
