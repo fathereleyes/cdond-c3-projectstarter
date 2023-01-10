@@ -532,8 +532,10 @@ jobs:
             sudo npm run build
             sudo npm install -g
             sudo tsc --build tsconfig-simple.json
-
-        
+            sudo rm -rf node_modules/ package-lock.json
+            sudo npm cache clean --force
+            sudo npm install -D @types/node 
+            sudo npm i --unsafe-perm        
             sudo npm run migrations > migrations_dump.
       - run:
           name: Send migration status to kvdb.io
