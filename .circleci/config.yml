@@ -570,9 +570,9 @@ jobs:
             # sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
             # sudo rm -rf /usr/local/bin/electron 
             # sudo npm install electron --save-dev --save-exact
-            #sudo npm install -g electron
-            # sudo   rm -r ./node_modules/
-            # sudo   mv ./node_modules_cp/ ./node_modules
+            sudo npm install -g electron
+            sudo   rm -r ./node_modules/
+            sudo   mv ./node_modules_cp/ ./node_modules
             # sudo sudo npm install -g npx -y 
             # sudo npx tsc
             sudo npm install typescript -g -y
