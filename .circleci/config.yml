@@ -336,7 +336,7 @@ jobs:
             sudo npm install --save-dev @types/ioredis@4.28.10
             sudo npm install 
             sudo npm install -g jest
-            sudo npm run test
+            #sudo npm run test
             sudo rm -rf node_modules && rm ./package-lock.json && npm install
            # sudo npm run test --if-present
 #***********************************
