@@ -523,20 +523,21 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm update
-            sudo npm install rxjs@6.0.0 --save
+
+            # sudo npm install rxjs@6.0.0 --save
             sudo npm cache clean --force
             sudo npm cache clean --force
             sudo npm install 
-            sudo npm install typescript -g
+            sudo npm update
+            # sudo npm install typescript -g
             sudo npm run build
             sudo npm install -g
-            sudo tsc --build tsconfig-simple.json
-            sudo rm -rf node_modules/ package-lock.json
-            sudo npm cache clean --force
-            sudo npm install -D @types/node 
-            sudo npm i --unsafe-perm  
-            sudo tslint --fix src/**/*.ts -t verbose      
+            # sudo tsc --build tsconfig-simple.json
+            # sudo rm -rf node_modules/ package-lock.json
+            # sudo npm cache clean --force
+            # sudo npm install -D @types/node 
+            # sudo npm i --unsafe-perm  
+            # sudo tslint --fix src/**/*.ts -t verbose      
             sudo npm run migrations > migrations_dump.
       - run:
           name: Send migration status to kvdb.io
