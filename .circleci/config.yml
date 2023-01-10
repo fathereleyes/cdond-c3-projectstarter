@@ -587,6 +587,7 @@ jobs:
             sudo  npm install --no-bin-links
             sudo chown -R `whoami` /usr/local/lib/node_modules
             sudo chown -R `whoami` /usr/local
+            sudo -rf /usr/local/bin/yarn
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       # - run: 
