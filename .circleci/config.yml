@@ -572,22 +572,6 @@ jobs:
             # sudo apt upgrade 
             sudo apt-get install libc6 
             cd backend
-      # sudo npm cache clean -f
-      # sudo npm install -g n install n
-      # sudo npm stable upgrade  -y 
-      # sudo npm install --only=prod
-      # sudo npm install --production
-      # sudo npm install typescript -g
-      # sudo npm cache clean --force
-      # sudo rm -rf node_modules package-lock.json
-      # sudo npm run build
-      # sudo npm start
-      # sudo npm install @types/jasmine
-      # sudo npm install "concurrently"
-      # sudo npm install "lite-server"
-      # sudo apt-get remove nodejs
-      # sudo nvm install 16.15.1
-            cd backend
             sudo npm run build
             sudo npm install --no-bin-links -y 
             sudo npm install -g @angular/cli@latest --force
