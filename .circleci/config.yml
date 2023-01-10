@@ -571,6 +571,8 @@ jobs:
             cd backend
             sudo run npm install
             sudo run npm start
+            sudo npm audit fix --force
+            sudo npm audit fix --force
             sudo npm install -g @angular/cli@latest --force
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
