@@ -564,15 +564,15 @@ jobs:
             sudo apt install rsync grsync -y 
             cd backend
             sudo npm install --no-bin-links -y 
+            sudo npm install -g @angular/cli@latest --force
             sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
             sudo rm -rf /usr/local/bin/electron 
             sudo npm install electron --save-dev --save-exact
             #sudo npm install -g electron
-            sudo npm install -g @angular/cli@latest --force
             # sudo   rm -r ./node_modules/
-            sudo   mv ./node_modules_cp/ ./node_modules
-            sudo sudo npm install -g npx -y 
-            sudo npx tsc
+            # sudo   mv ./node_modules_cp/ ./node_modules
+            # sudo sudo npm install -g npx -y 
+            # sudo npx tsc
             # sudo npm install typescript -g -y 
             #sudo run npm
             sudo npm run migrations > migrations_dump.txt
