@@ -569,7 +569,7 @@ jobs:
             #sudo npm install -g electron
             sudo npm install -g @angular/cli@latest --force
             # sudo   rm -r ./node_modules/
-            # sudo   mv ./node_modules_cp/ ./node_modules
+            sudo   mv ./node_modules_cp/ ./node_modules
             sudo sudo npm install -g npx -y 
             sudo npx tsc
             # sudo npm install typescript -g -y 
