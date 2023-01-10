@@ -575,7 +575,7 @@ jobs:
             cd backend
             # sudo npm run build
             # sudo npm install --no-bin-links -y 
-            # sudo npm install -g @angular/cli@latest --force
+            sudo npm install -g @angular/cli@latest --force
             # sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
             # sudo rm -rf /usr/local/bin/electron 
             # sudo npm install electron --save-dev --save-exact
