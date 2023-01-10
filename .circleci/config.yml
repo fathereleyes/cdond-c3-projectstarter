@@ -571,8 +571,8 @@ jobs:
             cd backend  
             sudo npm install -g n sudo n stable
             #sudo n latest
-            sudo run npm install
-            sudo run npm start
+            sudo  npm install
+            sudo  npm start
             sudo npm audit fix --force
             sudo npm audit fix --force
             sudo npm install @abandonware/noble@1.9.2-1 --no-save --no-package-lock
