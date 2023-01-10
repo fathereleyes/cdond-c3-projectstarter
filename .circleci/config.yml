@@ -565,35 +565,16 @@ jobs:
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt purge snapd 
-            #sudo apt update
-            #sudo apt list --upgradable 
-            sudo apt install update-manager-core -y
-            # sudo do-release-upgrade 
-            # sudo apt upgrade 
             sudo apt-get install libc6 
             sudo npm -g install typescript
             sudo npm i migrations
             cd backend
-            # sudo npm run build
-            # sudo npm install --no-bin-links -y 
             sudo npm install -g @angular/cli@latest --force
-            # sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
-            # sudo rm -rf /usr/local/bin/electron 
-            # sudo npm install electron --save-dev --save-exact
-            # sudo npm install -g electron
-            # sudo   rm -r ./node_modules/
-            # sudo   mv ./node_modules_cp/ ./node_modules
-            # sudo sudo npm install -g npx 
-            # sudo npx tsc
-
-            # sudo npm install typescript --save-dev
-            # sudo npm install electron --save-dev --save-exact --unsafe-perm=true --allow-root
-            # sudo run npm
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
-      - run:
-          name: Send migration status to kvdb.io
+      - run: 
           command: |
+          name: Send migration status to kvdb.io
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
