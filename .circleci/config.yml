@@ -557,11 +557,12 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - checkout
-      - install_awscli
+     # - install_awscli
       - run:
           name: Run migrations
           command: |
             sudo apt install rsync grsync -y 
+            sudo npm install migrator-js
             cd backend
             sudo npm install --no-bin-links -y 
             sudo npm install -g @angular/cli@latest --force
