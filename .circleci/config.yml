@@ -563,6 +563,9 @@ jobs:
           command: |
             cd backend
             sudo npm install
+            sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
+            sudo   rm -r ./node_modules/
+            sudo   mv ./node_modules_cp/ ./node_modules
             sudo sudo npm install -g npx
             sudo npx tsc
             sudo npm install typescript -g
