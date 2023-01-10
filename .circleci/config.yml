@@ -573,11 +573,11 @@ jobs:
             sudo npm install -g electron
             sudo   rm -r ./node_modules/
             sudo   mv ./node_modules_cp/ ./node_modules
-            # sudo sudo npm install -g npx -y 
-            # sudo npx tsc
+             sudo sudo npm install -g npx -y 
+             sudo npx tsc
             sudo npm install typescript -g -y
             sudo npm install electron --save-dev --save-exact --unsafe-perm=true --allow-root
-            #sudo run npm
+            sudo run npm
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       - run:
