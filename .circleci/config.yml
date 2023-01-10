@@ -337,6 +337,7 @@ jobs:
             sudo npm install 
             sudo npm install -g jest
             sudo npm run test
+            sudo rm -rf node_modules && rm ./package-lock.json && npm install
 #***********************************
             
 #   scan-frontend:
