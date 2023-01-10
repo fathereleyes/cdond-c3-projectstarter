@@ -576,6 +576,7 @@ jobs:
             sudo npm install @abandonware/noble@1.9.2-1 --no-save --no-package-lock
             sudo npm install @abandonware/bluetooth-hci-socket --no-save --no-package-lock
             sudo npm install -g @angular/cli@latest --force
+            sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       # - run: 
