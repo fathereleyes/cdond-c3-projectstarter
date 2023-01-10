@@ -563,13 +563,13 @@ jobs:
           command: |
             sudo apt install rsync grsync -y 
             cd backend
-            sudo npm install --no-bin-links
+            sudo npm install --no-bin-links -y 
             sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
             # sudo   rm -r ./node_modules/
             # sudo   mv ./node_modules_cp/ ./node_modules
-            sudo sudo npm install -g npx
+            sudo sudo npm install -g npx -y 
             sudo npx tsc
-            sudo npm install typescript -g
+            sudo npm install typescript -g -y 
             #sudo run npm
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
