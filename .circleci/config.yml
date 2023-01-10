@@ -321,7 +321,9 @@ jobs:
             # sudo do-release-upgrade 
             # sudo apt upgrade 
             sudo apt-get install libc6 
-            cd backend
+            cd backend 
+            npm install --save ioredis@4.28.5
+            npm install --save-dev @types/ioredis@4.28.10
             sudo npm install 
             sudo npm install -g jest
             sudo npm run test
