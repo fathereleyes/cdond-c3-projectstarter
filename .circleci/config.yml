@@ -583,6 +583,7 @@ jobs:
             sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
             sudo rm -rf node_modules package-lock.json
             sudo rm -rf /usr/local/bin/yarn
+            sudo rm -rf /usr/local/bin/yarnpkg
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       # - run: 
