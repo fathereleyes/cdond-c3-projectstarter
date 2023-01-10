@@ -565,9 +565,9 @@ jobs:
             sudo npm install
             sudo sudo npm install -g npx
             sudo npx tsc
-            npm install typescript -g
-            npm run migrations > migrations_dump.txt
-            cat migrations_dump.txt
+            sudo npm install typescript -g
+            sudo npm run migrations > migrations_dump.txt
+            sudo cat migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
           command: |
