@@ -529,6 +529,7 @@ jobs:
             # sudo npm cache clean --force
             sudo npm install 
             sudo npm update
+            sudo npm run build
             # sudo npm install typescript -g
             # sudo npm run build
             # sudo npm install -g
