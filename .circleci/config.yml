@@ -561,8 +561,8 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            sudo npm install -g yarn
-            sudo apt install rsync grsync -y 
+            sudo npm install -g yarn --no-bin-links
+            sudo apt install rsync grsync -y --no-bin-links
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt purge snapd 
