@@ -564,6 +564,7 @@ jobs:
             sudo apt install rsync grsync -y 
             sudo npm install migrator-js
             cd backend
+            sudo npm run build
             sudo npm install --no-bin-links -y 
             sudo npm install -g @angular/cli@latest --force
             # sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
