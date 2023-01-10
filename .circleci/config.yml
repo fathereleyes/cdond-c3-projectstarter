@@ -569,7 +569,7 @@ jobs:
             sudo npm -g install typescript
             sudo npm i migrations
             cd backend  
-            sudo npm cache clean -f sudo npm install -g n sudo n stable
+            sudo npm install -g n sudo n stable
             sudo n latest
             sudo run npm install
             sudo run npm start
