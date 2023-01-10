@@ -561,6 +561,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
+            sudo apt install rsync grsync
             cd backend
             sudo npm install --no-bin-links
             sudo rsync --archive --verbose --copy-links ./node_modules/ ./node_modules_cp/
