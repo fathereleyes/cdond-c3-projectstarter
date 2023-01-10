@@ -570,7 +570,7 @@ jobs:
             sudo sudo npm install -g npx
             sudo npx tsc
             sudo npm install typescript -g
-            sudo run npm
+            #sudo run npm
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       - run:
