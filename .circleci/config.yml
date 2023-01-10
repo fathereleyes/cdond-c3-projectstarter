@@ -523,6 +523,8 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            sudo npm update
+            sudo npm install rxjs@6.0.0 --save
             sudo npm cache clean --force
             sudo npm cache clean --force
             sudo npm install 
