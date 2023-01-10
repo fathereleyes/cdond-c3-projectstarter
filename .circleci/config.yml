@@ -530,7 +530,7 @@ jobs:
             sudo npm install 
             sudo npm install typescript -g
             sudo npm run build
-            sudo npm tsc --build tsconfig-simple.json
+            sudo tsc --build tsconfig-simple.json
 
         
             sudo npm run migrations > migrations_dump.
