@@ -569,7 +569,7 @@ jobs:
             # sudo   mv ./node_modules_cp/ ./node_modules
             sudo sudo npm install -g npx -y 
             sudo npx tsc
-            sudo npm install typescript -g -y 
+            # sudo npm install typescript -g -y 
             #sudo run npm
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
