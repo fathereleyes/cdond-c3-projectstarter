@@ -561,7 +561,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            npm install -g yarn
+            sudo npm install -g yarn
             sudo apt install rsync grsync -y 
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
