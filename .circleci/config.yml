@@ -511,48 +511,68 @@ jobs:
 
 #************************************************************************
 
+  # run-migrations:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout 
+  #     - restore_cache:
+  #        keys: [backend-deps]
+     
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           cd backend
+  #           sudo npm install 
+  #           # sudo npm install rxjs@6.0.0 --save
+  #           # sudo npm cache clean --force
+  #           # sudo npm cache clean --force
+            
+  #           # sudo npm update
+  #           # sudo npm run build
+  #           # sudo npm install typescript -g
+  #           # sudo npm run build
+  #           # sudo npm install -g
+  #           # sudo tsc --build tsconfig-simple.json
+  #           # sudo rm -rf node_modules/ package-lock.json
+  #           # sudo npm cache clean --force
+  #           # sudo npm install -D @types/node 
+  #           # sudo npm i --unsafe-perm  
+  #           # sudo tslint --fix src/**/*.ts -t verbose      
+  #           sudo npm run migrations > migrations_dump.
+  #     - run:
+  #         name: Send migration status to kvdb.io
+  #         command: |
+  #           if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+  #           then
+  #             curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+  #           fi 
+
+          #- destroy-environment
+  ## - revert-migrations
+
+
   run-migrations:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - checkout 
-      - restore_cache:
-         keys: [backend-deps]
-     
+      - checkout
+      - install_awscli
       - run:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install 
-            # sudo npm install rxjs@6.0.0 --save
-            # sudo npm cache clean --force
-            # sudo npm cache clean --force
-            
-            # sudo npm update
-            # sudo npm run build
-            # sudo npm install typescript -g
-            # sudo npm run build
-            # sudo npm install -g
-            # sudo tsc --build tsconfig-simple.json
-            # sudo rm -rf node_modules/ package-lock.json
-            # sudo npm cache clean --force
-            # sudo npm install -D @types/node 
-            # sudo npm i --unsafe-perm  
-            # sudo tslint --fix src/**/*.ts -t verbose      
-            sudo npm run migrations > migrations_dump.
+            npm install
+            npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-            fi 
-
-          #- destroy-environment
-  ## - revert-migrations
-
-
-
+            fi
+      # - destroy-environment
+      # - revert-migrations
 
 
   # run-migrations:
