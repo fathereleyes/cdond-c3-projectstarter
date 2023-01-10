@@ -523,13 +523,13 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-
+            sudo npm install 
             # sudo npm install rxjs@6.0.0 --save
             # sudo npm cache clean --force
             # sudo npm cache clean --force
-            sudo npm install 
-            sudo npm update
-            sudo npm run build
+            
+            # sudo npm update
+            # sudo npm run build
             # sudo npm install typescript -g
             # sudo npm run build
             # sudo npm install -g
