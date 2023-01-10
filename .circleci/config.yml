@@ -569,6 +569,8 @@ jobs:
             sudo npm -g install typescript
             sudo npm i migrations
             cd backend
+            sudo run npm install
+            sudo run npm start
             sudo npm install -g @angular/cli@latest --force
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
