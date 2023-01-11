@@ -571,7 +571,9 @@ jobs:
             cd backend  
             sudo npm install -g n sudo n stable
             #sudo n latest
-            sudo rm -rf node_modules package-lock.json
+            sudo 
+            
+            rm -rf node_modules package-lock.json
             sudo  npm install
             sudo  npm start
             sudo npm audit fix --force
@@ -588,10 +590,10 @@ jobs:
             sudo chown -R `whoami` /usr/local
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
-      # - run: 
+      ## - run: 
       #     command: |
       #     name: Send migration status to kvdb.io
-      #       if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+      ##       if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
       #       then
       #         curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       #       fi
