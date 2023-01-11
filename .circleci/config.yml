@@ -341,7 +341,7 @@ jobs:
            # sudo npm run test --if-present
 #***********************************
             
-#   scan-frontend:
+##   scan-frontend:
 #     docker:
 #       # Docker image here
 #     steps:
