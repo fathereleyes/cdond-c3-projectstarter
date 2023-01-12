@@ -28,8 +28,8 @@ Resources:
           CidrIp: 0.0.0.0/0  
 
         - IpProtocol: tcp
-          FromPort: 2345
-          ToPort: 2345
+          FromPort: 5432
+          ToPort: 5432
           CidrIp: 0.0.0.0/0  
 
   EC2Instance:
