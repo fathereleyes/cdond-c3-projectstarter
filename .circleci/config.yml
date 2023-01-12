@@ -410,9 +410,9 @@ jobs:
       - run : 
           name: install_awscli
           command: |
-              # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              # unzip awscliv2.zip
-              # sudo ./aws/install 
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install 
       - run : 
             name: Ensure back-end infrastructure exist
             command: |
@@ -464,7 +464,7 @@ jobs:
 #           command: |
 #             # Your code here
 #             exit 1
-#       # Here's where you will add some code to rollback on failure  
+# #      # Here's where you will add some code to rollback on failure  
 
 #***********************************************************************
 
