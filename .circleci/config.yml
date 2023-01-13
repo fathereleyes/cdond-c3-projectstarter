@@ -445,7 +445,7 @@ jobs:
             root: ~/
             paths:
               - project/.circleci/ansible/inventory.txt   
-      - destroy-environment 
+      #- destroy-environment 
 
 #********************************************************************
 ###   configure-infrastructure:
@@ -487,7 +487,7 @@ jobs:
          cd .circleci/ansible
          cat inventory.txt
          ansible-playbook -i inventory.txt configure-server.yml
-    - destroy-environment
+    #- destroy-environment
 
 
 #######*******************************######################
