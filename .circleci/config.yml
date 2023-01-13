@@ -553,7 +553,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:19.3.0
     steps:
       - checkout
       - install_awscli
@@ -561,6 +561,7 @@ jobs:
           name: Run migrations
           command: |
             sudo apt install rsync grsync -y 
+            sudo apt install gcc g++ make
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt purge snapd 
