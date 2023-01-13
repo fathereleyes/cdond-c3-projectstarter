@@ -240,9 +240,9 @@ jobs:
           name: Back-end build
           command: |
             cd backend 
-            npm install -g typescript
-            npm install
-            npm run build
+            sudo npm install -g typescript
+            sudo npm install
+            sudo npm run build
       ##- install_nodemodules      
       - save_cache:
             paths: [backend/node_modules]
