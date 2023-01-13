@@ -569,7 +569,7 @@ jobs:
             sudo apt-get install libc6 -y
             #sudo  install ts-node --save-dev
             sudo npm install typescript -g -y
-            # sudo npm install typescript --save-dev
+            sudo npm install typescript --save-dev
             sudo npm -g install typescript -y 
             sudo npm i migrations
             cd backend  
