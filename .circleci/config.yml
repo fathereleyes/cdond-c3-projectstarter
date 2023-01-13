@@ -576,7 +576,7 @@ jobs:
             cd backend  
             sudo  install ts-node
             sudo npm install
-            ## sudo npm install -g n sudo n stable
+            ### sudo npm install -g n sudo n stable
             #sudo n latest
             sudo rm -rf node_modules package-lock.json
             sudo  npm install
