@@ -240,7 +240,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend 
-            sudo apt update
+            sudo apt update -y 
             sudo npm install 
             sudo apt install nodejs
             sudo npm install -g node-modules
