@@ -562,19 +562,17 @@ jobs:
           command: |
             sudo apt install rsync grsync -y 
             sudo apt install gcc g++ make
-            sudo npm install migrator-js
+            #sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt purge snapd 
-            sudo npm install -g npm-check-updates
+            # sudo npm install -g npm-check-updates
             sudo apt-get install libc6 
             sudo npm -g install typescript
             sudo npm i migrations
             cd backend  
-            sudo npm install -g n sudo n stable
+            # sudo npm install -g n sudo n stable
             #sudo n latest
-            sudo 
-            
-            rm -rf node_modules package-lock.json
+            sudo rm -rf node_modules package-lock.json
             sudo  npm install
             sudo  npm start
             sudo npm audit fix --force
@@ -916,10 +914,10 @@ workflows:
         #   filters:
         #     branches:
         #       only: [master]
-      - configure-infrastructure
+     # - configure-infrastructure
          #  requires: [deploy-infrastructure]
-      - run-migrations:
-           requires: [configure-infrastructure]
+      - run-migrations
+       #    requires: [configure-infrastructure]
       ## - deploy-frontend:
       #     requires: [run-migrations]
       ## - deploy-backend:
