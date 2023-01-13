@@ -570,7 +570,7 @@ jobs:
             sudo  install ts-node --save-dev
             sudo npm install typescript -g -y
             sudo npm i express-unless --save
-            sudo npm install typescript --save-dev
+            sudo npm install typescript 
             sudo npm -g install typescript -y 
             sudo npm i migrations
             cd backend  
