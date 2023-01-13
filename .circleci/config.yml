@@ -556,7 +556,7 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - checkout
-      - install_awscli
+#      - install_awscli
       - run:
           name: Run migrations
           command: |
@@ -567,9 +567,9 @@ jobs:
             sudo apt purge snapd 
             # sudo npm install -g npm-check-updates
             sudo apt-get install libc6 
-            npm install ts-node --save-dev
-            npm install typescript -g 
-            npm install typescript --save-dev
+            sudo  install ts-node --save-dev
+            sudo npm install typescript -g 
+            sudo npm install typescript --save-dev
             sudo npm -g install typescript
             sudo npm i migrations
             cd backend  
