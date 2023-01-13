@@ -560,8 +560,8 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            sudo apt install rsync grsync -y 
-            sudo apt install gcc g++ make -y 
+            #sudo apt install rsync grsync -y 
+            3sudo apt install gcc g++ make -y 
             #sudo npm install migrator-js -y 
             sudo apt-get -y update && sudo apt-get -y upgrade
             sudo apt install snapd -y
