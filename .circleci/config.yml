@@ -565,12 +565,12 @@ jobs:
             #sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt install snapd 
-            # sudo npm install -g npm-check-updates
+            # sudo npm install -g npm-check-updates -y 
             sudo apt-get install libc6 
             #sudo  install ts-node --save-dev
-            sudo npm install typescript -g 
+            sudo npm install typescript -g -y
             sudo npm install typescript --save-dev
-            sudo npm -g install typescript
+            sudo npm -g install typescript -y 
             sudo npm i migrations
             cd backend  
             # sudo npm install -g n sudo n stable
@@ -584,7 +584,7 @@ jobs:
             # sudo npm install @abandonware/bluetooth-hci-socket --no-save --no-package-lock
             sudo npm install -g @angular/cli@latest --force
             sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
-            sudo rm -rf node_modules package-lock.json
+            #sudo rm -rf node_modules package-lock.json
             sudo  npm config set unsafe-perm true
             sudo  npm cache clean
             sudo  npm install --no-bin-links
