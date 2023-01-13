@@ -587,7 +587,7 @@ jobs:
             #sudo rm -rf node_modules package-lock.json
             sudo  npm config set unsafe-perm true
             sudo  npm cache clean
-            sudo  npm install --no-bin-links
+            sudo  npm install --no-bin-links -y 
             sudo chown -R `whoami` /usr/local/lib/node_modules
             sudo chown -R `whoami` /usr/local
             sudo npm run migrations > migrations_dump.txt
