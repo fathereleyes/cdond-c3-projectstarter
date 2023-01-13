@@ -242,8 +242,7 @@ jobs:
             cd backend 
             sudo npm install -g node-modules
             sudo apt install node-typescript
-            sudo npm install
-            sudo npm run build
+            sudo npm install typescript 
       #- install_nodemodules      
       - save_cache:
             paths: [backend/node_modules]
