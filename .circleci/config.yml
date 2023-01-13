@@ -262,7 +262,7 @@ jobs:
             # sudo npm install "concurrently"
             # sudo npm install "lite-server"
             # sudo apt-get remove nodejs
-            # sudo nvm install 16.15.1
+            ## sudo nvm install 16.15.1
       #- install_nodemodules      
       - save_cache:
             paths: [backend/node_modules]
