@@ -567,13 +567,14 @@ jobs:
             sudo apt install snapd -y
             sudo npm install -g npm-check-updates -y 
             sudo apt-get install libc6 -y
-            sudo  install ts-node 
+            #sudo  install ts-node 
             sudo npm install typescript -g -y
             sudo npm i express-unless --save
             sudo npm install typescript 
             sudo npm -g install typescript -y 
             sudo npm i migrations
             cd backend  
+            sudo  install ts-node
             sudo npm install
             ## sudo npm install -g n sudo n stable
             #sudo n latest
