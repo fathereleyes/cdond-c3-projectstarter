@@ -561,9 +561,9 @@ jobs:
           name: Run migrations
           command: |
             sudo apt install rsync grsync -y 
-            sudo apt install gcc g++ make
-            #sudo npm install migrator-js
-            sudo apt-get update && sudo apt-get -y upgrade
+            sudo apt install gcc g++ make -y 
+            #sudo npm install migrator-js -y 
+            sudo apt-get -y update && sudo apt-get -y upgrade
             sudo apt install snapd 
             # sudo npm install -g npm-check-updates -y 
             sudo apt-get install libc6 
