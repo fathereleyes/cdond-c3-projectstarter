@@ -564,12 +564,12 @@ jobs:
             sudo apt install gcc g++ make -y 
             #sudo npm install migrator-js -y 
             sudo apt-get -y update && sudo apt-get -y upgrade
-            sudo apt install snapd 
+            sudo apt install snapd -y
             # sudo npm install -g npm-check-updates -y 
-            sudo apt-get install libc6 
+            sudo apt-get install libc6 -y
             #sudo  install ts-node --save-dev
             sudo npm install typescript -g -y
-            sudo npm install typescript --save-dev
+            # sudo npm install typescript --save-dev
             sudo npm -g install typescript -y 
             sudo npm i migrations
             cd backend  
