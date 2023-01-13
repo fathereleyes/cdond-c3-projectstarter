@@ -240,6 +240,7 @@ jobs:
           name: Back-end build
           command: |
             cd backend 
+            sudo npm install -g node-modules
             sudo npm install -g typescript 
             sudo npm install
             sudo npm run build
