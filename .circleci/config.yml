@@ -241,10 +241,12 @@ jobs:
           command: |
             cd backend 
             sudo apt update
+            sudo npm install 
             sudo apt install nodejs
             sudo npm install -g node-modules
             sudo apt install node-typescript
-            sudo npm install typescript 
+            sudo npm install typescript
+            sudo npm run build
       #- install_nodemodules      
       - save_cache:
             paths: [backend/node_modules]
