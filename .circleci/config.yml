@@ -241,7 +241,7 @@ jobs:
           command: |
             cd backend 
             sudo npm install -g node-modules
-            sudo npm install -g typescript 
+            sudo apt install node-typescript
             sudo npm install
             sudo npm run build
       #- install_nodemodules      
