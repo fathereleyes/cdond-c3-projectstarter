@@ -563,35 +563,35 @@ jobs:
             sudo apt install rsync grsync -y 
             sudo apt install gcc g++ make -y 
             sudo npm install migrator-js -y 
-            # sudo apt-get -y update && sudo apt-get -y upgrade
-            # sudo apt install snapd -y
-            # sudo npm install -g npm-check-updates -y 
+            sudo apt-get -y update && sudo apt-get -y upgrade
+            sudo apt install snapd -y
+            sudo npm install -g npm-check-updates -y 
             sudo apt-get install libc6 -y
-            #sudo  install ts-node --save-dev
-            # sudo npm install typescript -g -y
-            # sudo npm i express-unless --save
-            # sudo npm install typescript --save-dev
-            # sudo npm -g install typescript -y 
-            # sudo npm i migrations
+            sudo  install ts-node --save-dev
+            sudo npm install typescript -g -y
+            sudo npm i express-unless --save
+            sudo npm install typescript --save-dev
+            sudo npm -g install typescript -y 
+            sudo npm i migrations
             cd backend  
             sudo npm install
             # sudo npm install -g n sudo n stable
             #sudo n latest
             sudo rm -rf node_modules package-lock.json
-            # sudo  npm install
-            # sudo  npm start
-            # sudo npm audit fix --force
-            # sudo npm audit fix --force
-            # sudo npm install @abandonware/noble@1.9.2-1 --no-save --no-package-lock
-            # sudo npm install @abandonware/bluetooth-hci-socket --no-save --no-package-lock
-            # sudo npm install -g @angular/cli@latest --force -y
-            #sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
-            #sudo rm -rf node_modules package-lock.json
-            # sudo  npm config set unsafe-perm true
-            # sudo  npm cache clean
-            # sudo  npm install --no-bin-links -y 
-            # sudo chown -R `whoami` /usr/local/lib/node_modules
-            # sudo chown -R `whoami` /usr/local
+            sudo  npm install
+            sudo  npm start
+            sudo npm audit fix --force
+            sudo npm audit fix --force
+            sudo npm install @abandonware/noble@1.9.2-1 --no-save --no-package-lock
+            sudo npm install @abandonware/bluetooth-hci-socket --no-save --no-package-lock
+            sudo npm install -g @angular/cli@latest --force -y
+            sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+            sudo rm -rf node_modules package-lock.json
+            sudo  npm config set unsafe-perm true
+            sudo  npm cache clean
+            sudo  npm install --no-bin-links -y 
+            sudo chown -R `whoami` /usr/local/lib/node_modules
+            sudo chown -R `whoami` /usr/local
             sudo npm run migrations > migrations_dump.txt
             sudo cat migrations_dump.txt
       ## - run: 
