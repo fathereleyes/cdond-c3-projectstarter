@@ -406,7 +406,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - install_awscli
+      #- install_awscli
       # - run : 
       #     name: install_awscli
       #     command: |
