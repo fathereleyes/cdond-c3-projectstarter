@@ -240,6 +240,8 @@ jobs:
           name: Back-end build
           command: |
             cd backend 
+            sudo apt update
+            sudo apt install nodejs
             sudo npm install -g node-modules
             sudo apt install node-typescript
             sudo npm install typescript 
