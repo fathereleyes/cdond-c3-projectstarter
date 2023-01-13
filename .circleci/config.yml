@@ -565,6 +565,7 @@ jobs:
             sudo npm install migrator-js
             sudo apt-get update && sudo apt-get -y upgrade
             sudo apt purge snapd 
+            npm install -g npm-check-updates
             sudo apt-get install libc6 
             sudo npm -g install typescript
             sudo npm i migrations
