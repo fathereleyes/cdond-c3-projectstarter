@@ -1,26 +1,26 @@
 version: 2.1 
 
 commands:
-  install_awscli:
-    description: Install aws cli v2
-    steps:
-      - run: 
-          name: Install aws cli 
-          command: |
-              #sudo apt update 
-              sudo apt -y update 
-              sudo apt-get install -f
-              sudo apt-get update  --fix-missing
-              sudo apt-get update 
-              #sudo apt-get install awscli
-              #sudo  install  awscli
-              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              sudo apt-get install zip 
-              sudo apt-get install unzip 
-              sudo apt -y install vim 
-              sudo unzip awscliv2.zip 
-              sudo ./aws/install 
-              sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+  # install_awscli:
+  #   description: Install aws cli v2
+    # steps:
+    #   - run: 
+    #       name: Install aws cli 
+    #       command: |
+    #           #sudo apt update 
+    #           sudo apt -y update 
+    #           sudo apt-get install -f
+    #           sudo apt-get update  --fix-missing
+    #           sudo apt-get update 
+    #           #sudo apt-get install awscli
+    #           #sudo  install  awscli
+    #           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    #           sudo apt-get install zip 
+    #           sudo apt-get install unzip 
+    #           sudo apt -y install vim 
+    #           sudo unzip awscliv2.zip 
+    #           sudo ./aws/install 
+    #           sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 
 
   install_nodemodules:
@@ -569,6 +569,7 @@ jobs:
             sudo apt-get install libc6 -y
             #sudo  install ts-node --save-dev
             sudo npm install typescript -g -y
+            sudo npm i express-unless --save
             sudo npm install typescript --save-dev
             sudo npm -g install typescript -y 
             sudo npm i migrations
