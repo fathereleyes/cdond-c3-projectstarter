@@ -583,7 +583,7 @@ jobs:
   #           # sudo npm install -g @angular/cli
   #           # # sudo chown -R $(whoami) /usr/local/lib/
   #           # # sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-  #           # # sudo chmod -R 777 /usr/local/lib/node_modules
+  ##           # # sudo chmod -R 777 /usr/local/lib/node_modules
   #           npm run migrations > migrations_dump.txt
   #           cat migrations_dump.txt
       # - run:
