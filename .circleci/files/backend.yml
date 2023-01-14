@@ -43,7 +43,7 @@ Resources:
       # Ubuntu 18 or higher works fine
       #ImageId: ami-052efd3df9dad4825
       #ImageId: ami-0574da719dca65348
-       ImageId: ami-0b93ce03dcbcb10f6
+      ImageId: ami-0b93ce03dcbcb10f6
       #ImageId:  ami-08fdec01f5df9998f
      # ImageId:  ami-06878d265978313ca
 
