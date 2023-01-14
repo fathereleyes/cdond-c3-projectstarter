@@ -3,10 +3,6 @@ We are archiving this repository because we do not want learners to push persona
 - [Submit a support ticket](https://udacity.zendesk.com/hc/en-us/requests/new) along with the link to your forked repository. 
 - If you are an enterprise learner, please [Submit a support ticket here](https://udacityenterprise.zendesk.com/hc/en-us/requests/new?ticket_form_id=360000279131)
 
-**********this project prepared by : 
-Mohamed Ibrahim Ahmed AboElenien
-mohamed.ibrahim.linux@gmail.com****************
-
 ## Give your Application Auto-Deploy Superpowers
 
 In this project, you will prove your mastery of the following learning objectives:
@@ -66,16 +62,3 @@ Before you submit your project, please check your work against the project rubri
 ### License
 
 [License](LICENSE.md)
-
-this project prepared by : 
-Mohamed Ibrahim Ahmed AboElenien
-mohamed.ibrahim.linux@gmail.com
-
-this project prepared by : 
-Mohamed Ibrahim Ahmed AboElenien
-mohamed.ibrahim.linux@gmail.com
-
-this project prepared by : 
-Mohamed Ibrahim Ahmed AboElenien
-mohamed.ibrahim.linux@gmail.com
-
