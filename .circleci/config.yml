@@ -241,7 +241,7 @@ jobs:
           command: |
             cd backend 
             # npm install -g typescript
-            # npm i ts-node typescript
+            npm i ts-node typescript
             npm install
             npm run build
       ##- install_nodemodules      
