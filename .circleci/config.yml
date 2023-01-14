@@ -544,22 +544,23 @@ jobs:
           name: Run migrations
           command: |
                 cd backend
+                sudo npm install
+                sudo npm run migrations > migrations_dump.txt 
+                cat migrations_dump.txt
                 #  sudo npm install -g typescript
                 #  sudo npm install -g ts-node
-                sudo npm install
-                sudo npm run migrations > migrations_dump.txt
                 #  sudo chmod -R 777 *
                 #  sudo chmod -R 777 * /usr/local/lib/node_modules
-                cat migrations_dump.txt
-      ## - run: 
-      #     command: |
-      #     name: Send migration status to kvdb.io
-      ##       if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-      #       then
-      #         curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-      #       fi
-      # - destroy-environment
-      ## - revert-migrations
+
+      - run: 
+          command: |
+          name: Send migration status to kvdb.io
+             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+              curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            fi
+      - destroy-environment
+      # - revert-migrations
 
 
   # run-migrations:
@@ -871,16 +872,16 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
-      # - deploy-infrastructure:
-      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #     filters:
-      #       branches:
-      #         only: [master]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [master]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       - run-migrations:
-          requires: [test-backend]
-          # requires: [configure-infrastructure]
+           requires: [test-backend, configure-infrastructure]
+           #requires: [configure-infrastructure]
       ## - deploy-frontend:
       #     requires: [run-migrations]
       ## - deploy-backend:
