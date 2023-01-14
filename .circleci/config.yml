@@ -545,6 +545,7 @@ jobs:
           command: |
                  cd backend
                  sudo npm install -g typescript
+                 sudo chmod -R 777 *
                  npm install
                  npm run migrations > migrations_dump.txt
                  cat migrations_dump.txt
