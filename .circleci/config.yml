@@ -543,14 +543,14 @@ jobs:
       - run:
           name: Run migrations
           command: |
-                 cd backend
-                 sudo npm install -g typescript
-                 sudo npm install -g ts-node
-                 sudo npm install
-                 sudo npm run migrations > migrations_dump.txt
-                 sudo chmod -R 777 *
-                 sudo chmod -R 777 * /usr/local/lib/node_modules
-                 cat migrations_dump.txt
+                cd backend
+                #  sudo npm install -g typescript
+                #  sudo npm install -g ts-node
+                sudo npm install
+                sudo npm run migrations > migrations_dump.txt
+                #  sudo chmod -R 777 *
+                #  sudo chmod -R 777 * /usr/local/lib/node_modules
+                cat migrations_dump.txt
       ## - run: 
       #     command: |
       #     name: Send migration status to kvdb.io
