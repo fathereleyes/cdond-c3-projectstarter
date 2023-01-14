@@ -547,7 +547,7 @@ jobs:
                 sudo npm install -g ts-node
                 sudo npm install 
                 sudo chmod -R 777 *
-                sudo npm run migrations > migrations_dump.txt
+                npm run migrations > migrations_dump.txt
                 sudo chmod -R 777 * /usr/local/lib/node_modules
       - run: 
           name: Send migration status to kvdb.io
@@ -874,7 +874,7 @@ workflows:
   #         filters:
   #           branches:
   #             only: [master]
-      - configure-infrastructure
+  #    - configure-infrastructure
           #requires: [deploy-infrastructure]
       - run-migrations:
            requires: [configure-infrastructure]
