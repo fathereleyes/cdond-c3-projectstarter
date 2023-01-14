@@ -562,7 +562,7 @@ jobs:
       # - revert-migrations
 
 
-  # run-migrations:
+  ## run-migrations:
   #   docker:
   #     - image: cimg/node:13.8.0
   #   steps:
