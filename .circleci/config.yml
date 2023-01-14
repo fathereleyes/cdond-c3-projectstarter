@@ -876,9 +876,9 @@ workflows:
       #     filters:
       #       branches:
       #         only: [master]
-      - configure-infrastructure
-          #requires: [deploy-infrastructure]
-      # - run-migrations:
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations
       #      requires: [test-backend, configure-infrastructure]
            #requires: [configure-infrastructure]
       ## - deploy-frontend:
