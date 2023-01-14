@@ -543,8 +543,8 @@ jobs:
           command: |
                  cd backend
                  npm install
-                 sudo npm run migrations > migrations_dump.txt
-                 sudo cat migrations_dump.txt
+                 npm run migrations > migrations_dump.txt
+                 cat migrations_dump.txt
       ## - run: 
       #     command: |
       #     name: Send migration status to kvdb.io
@@ -552,7 +552,7 @@ jobs:
       #       then
       #         curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       #       fi
-      - destroy-environment
+      # - destroy-environment
       ## - revert-migrations
 
 
@@ -872,8 +872,8 @@ workflows:
       #         only: [master]
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      - run-migrations
+          # requires: [configure-infrastructure]
       ## - deploy-frontend:
       #     requires: [run-migrations]
       ## - deploy-backend:
