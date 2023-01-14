@@ -20,8 +20,8 @@
 
     - name: "install python for Ansible."
       apt: 
-      name: python3
-      update_cache: yes
+        name: python3
+        update_cache: yes
 
 
   roles:
