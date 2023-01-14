@@ -537,6 +537,8 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - checkout
+      - restore_cache:
+          keys: [backend-build-depend]
       #- install_awscli
       - run:
           name: Run migrations
@@ -873,7 +875,7 @@ workflows:
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
       - run-migrations:
-          requires: [scan-backend]
+          requires: [test-backend]
           # requires: [configure-infrastructure]
       ## - deploy-frontend:
       #     requires: [run-migrations]
