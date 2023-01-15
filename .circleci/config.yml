@@ -546,6 +546,7 @@ jobs:
                 sudo npm install -g typescript
                 sudo npm install -g ts-node
                 sudo npm install 
+                sudo npm start
                 sudo chmod -R 777 *
                 npm run migrations > migrations_dump.txt
                 sudo chmod -R 777 * /usr/local/lib/node_modules
