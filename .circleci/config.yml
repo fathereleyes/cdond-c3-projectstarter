@@ -543,7 +543,7 @@ jobs:
           name: Run migrations
           command: |
                 cd backend
-                sudo rm -rf node_modules && rm ./package-lock.json && npm install
+                #sudo rm -rf node_modules && rm ./package-lock.json && npm install
                 sudo npm install -g typescript
                 sudo npm install -g ts-node 
                 sudo npm install --save @types/node
