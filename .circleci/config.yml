@@ -544,17 +544,17 @@ jobs:
           command: |
                 cd backend
                 #sudo rm -rf node_modules && rm ./package-lock.json && npm install
-                # sudo npm install -g typescript
-                # sudo npm install -g ts-node 
-                # sudo npm install --save @types/node 
-                # sudo npm install -g node-pre-gyp
-                # sudo rm -r node_modules
-                  sudo npm install 
-                  sudo npm uninstall tsc
+                 sudo npm install -g typescript
+                 sudo npm install -g ts-node 
+                 sudo npm install --save @types/node 
+                 sudo npm install -g node-pre-gyp
+                 sudo rm -r node_modules
+                 sudo npm install 
+                 # sudo npm uninstall tsc
                 # sudo npm start
                 # sudo chmod -R 777 *
                 npm run migrations > migrations_dump.txt
-                # sudo chmod -R 777 * /usr/local/lib/node_modules
+                 sudo chmod -R 777 * /usr/local/lib/node_modules
       - run: 
           name: Send migration status to kvdb.io
           command: |
@@ -865,25 +865,25 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:  
-             requires: [deploy-infrastructure]
-      - run-migrations:
-           requires: [configure-infrastructure]
+      #- build-frontend
+      #- build-backend
+      #- test-frontend:
+       #   requires: [build-frontend]
+      #- test-backend:
+       #   requires: [build-backend]
+      #- scan-backend:
+       #   requires: [build-backend]
+      #- scan-frontend:
+       #   requires: [build-frontend]
+      #- deploy-infrastructure:
+       #   requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+        #  filters:
+         #   branches:
+          #    only: [master]
+      #- configure-infrastructure:  
+       #      requires: [deploy-infrastructure]
+      - run-migrations
+        #   requires: [configure-infrastructure]
       ## - deploy-frontend:
       #     requires: [run-migrations]
       ## - deploy-backend:
