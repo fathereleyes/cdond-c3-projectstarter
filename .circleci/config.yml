@@ -875,7 +875,7 @@ workflows:
       #     filters:
       #       branches:
       #         only: [master]
-      - configure-infrastructure
+      # - configure-infrastructure
          # requires: [deploy-infrastructure]
       - run-migrations
           # requires: [configure-infrastructure]
@@ -888,4 +888,4 @@ workflows:
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
-      ###     requires: [cloudfront-update]
+      ####     requires: [cloudfront-update]
