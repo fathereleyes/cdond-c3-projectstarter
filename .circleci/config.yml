@@ -356,104 +356,87 @@ jobs:
 #             # your code here
 #       # Here's where you will add some code to rollback on failure   
 #**************************************************             
-  # deploy-frontend:
-  #   docker:
-  #     - image: cimg/python:3.10
-  #   steps:
-  #     - checkout
-  #     - install_awscli
-  #     - install_nodejs
-  #     - restore_cache:
-  #         keys: [backend-deps]
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           cd frontend
-  #           npm install
-  #     - run:
-  #       name: Get backend url
-  #       command: |
-  #         BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-  #           --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-  #           --query 'Reservations[*].Instances[*].PublicIpAddress' \
-  #           --output text)
-  #         echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-  #         cat frontend/.env
+  deploy-frontend:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - install_awscli
+      - install_nodejs
+      - restore_cache:
+          keys: [backend-deps]
+      - run:
+          name: Install dependencies
+          command: |
+            cd frontend
+            npm install
+      - run:
+          name: Get backend url
+          command: |
+            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text)
+            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+            cat frontend/.env
 
-  #     - run:
-  #       name: Deploy frontend objects
-  #       command: |
-  #             cd frontend
-  #             npm run build
-  #             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-  #     - destroy-environment
-  #     - revert-migrations
-#***********************************************
-#   deploy-backend:
-#     docker:
-#       # Docker image here that supports Ansible
-#     steps:
-#       # Checkout code from git
-#       # Add ssh keys with fingerprint
-#       # attach workspace
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # your code here
-#       - run:
-#           name: Deploy backend
-#           command: |
-#             # your code here
-#       # Here's where you will add some code to rollback on failure  
-#*********************************************
+      - run:
+          name: Deploy frontend objects
+          command: |
+                cd frontend
+                npm run build
+                aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+      - destroy-environment
+      - revert-migrations
 
-  # deploy-backend:
-  #   docker:
-  #     - image: cimg/base:stable
-  #   steps:
-  #     - checkout
-  #     - install_awscli
-  #     - install_nodejs
-  #     - install_ansible
-  #     - install_awscli
-  #     - add_ssh_keys:
-  #      #fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
-  #      fingerprints: ["b5:e4:1a:3e:4e:74:af:7b:5a:45:ad:23:58:e7:dd:25"]
+
+  deploy-backend:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - install_awscli
+      - install_nodejs
+      - install_ansible
+      - install_awscli
+      - add_ssh_keys:
+       #fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
+       fingerprints: ["b5:e4:1a:3e:4e:74:af:7b:5a:45:ad:23:58:e7:dd:25"]
   
 
-  #     - attach_workspace:
-  #         at: ~/
-  #     - restore_cache:
-  #         keys:
-  #           - [backend-deps]   
-  ##     - run:
-  #         name: Install dependencies
-  #         command: |
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           cd backend
-  #           npm install
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys:
+            - [backend-deps]   
+      - run:
+          name: Install dependencies
+          command: |
+      - run:
+          name: Install dependencies
+          command: |
+            cd backend
+            npm install
 
-  #     - run:
-  #         name: Get backend url
-  #         command: |
-  #           BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-  #           --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-  #           --query 'Reservations[*].Instances[*].PublicIpAddress' \
-  #           --output text)
-  #           echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-  #           cat frontend/.env  
+      - run:
+          name: Get backend url
+          command: |
+            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text)
+            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+            cat frontend/.env  
 
-  #     - run:
-  #         name: Deploy frontend objects
-  #         command: |
-  #           cd frontend
-  #           npm run build
-  #           aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive   
+      - run:
+          name: Deploy frontend objects
+          command: |
+            cd frontend
+            npm run build
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive   
 
-  #     - destroy-environment
-  #     - revert-migrations
+      - destroy-environment
+      - revert-migrations
 
 
 #***********************************************
