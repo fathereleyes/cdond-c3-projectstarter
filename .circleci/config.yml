@@ -544,16 +544,16 @@ jobs:
           command: |
                 cd backend
                 #sudo rm -rf node_modules && rm ./package-lock.json && npm install
-                sudo npm install -g typescript
-                sudo npm install -g ts-node 
-                sudo npm install --save @types/node 
-                sudo npm install -g node-pre-gyp
-                sudo rm -r node_modules
-                sudo npm install 
-                sudo npm start
-                sudo chmod -R 777 *
+                # sudo npm install -g typescript
+                # sudo npm install -g ts-node 
+                # sudo npm install --save @types/node 
+                # sudo npm install -g node-pre-gyp
+                # sudo rm -r node_modules
+                # sudo npm install 
+                # sudo npm start
+                # sudo chmod -R 777 *
                 npm run migrations > migrations_dump.txt
-                sudo chmod -R 777 * /usr/local/lib/node_modules
+                # sudo chmod -R 777 * /usr/local/lib/node_modules
       - run: 
           name: Send migration status to kvdb.io
           command: |
