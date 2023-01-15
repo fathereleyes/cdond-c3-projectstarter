@@ -60,8 +60,19 @@ commands:
             sudo apt install -y nodejs
             # Use n version manager to use Node.js v13.8.0
             sudo npm install --global n
-            sudo n 13.8.0  
+            sudo n 13.8.0   
 
+
+  install_zip_unzip:
+    description: Install zip-tar
+    steps:
+      - run:
+          name: Install_zip_unzip
+          command: |
+            # Install zip
+              sudo apt-get install zip
+            # install unzip
+              sudo apt-get install unzip
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -389,21 +400,18 @@ jobs:
       - destroy-environment
       - revert-migrations
 
-
+#######-----------------###################
   deploy-backend:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
       - install_nodejs
       - install_ansible
-      - install_awscli
+      - install_zip_unzip
       - add_ssh_keys:
-       #fingerprints: ["12:ec:67:df:21:96:8f:d6:33:74:7a:05:e0:d7:aa:bf"]
-         fingerprints: ["b5:e4:1a:3e:4e:74:af:7b:5a:45:ad:23:58:e7:dd:25"]
-  
-
+          fingerprints: ["a3:57:49:75:f2:1c:b5:c8:9d:42:4d:5a:68:0b:52:c6:67:43:d3:5d"]
       - attach_workspace:
           at: ~/
       - restore_cache:
@@ -412,12 +420,16 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-      - run:
-          name: Install dependencies
-          command: |
             cd backend
-            npm install
-
+            npm i
+            npm run build
+            cd ..
+            # Zip the directory
+            tar -C backend -czvf artifact.tar.gz .
+            cd .circleci/ansible
+            "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
+            ansible-playbook -i inventory.txt deploy-backend.yml
       - run:
           name: Get backend url
           command: |
@@ -427,7 +439,6 @@ jobs:
             --output text)
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             cat frontend/.env  
-
       - run:
           name: Deploy frontend objects
           command: |
@@ -438,8 +449,7 @@ jobs:
       - destroy-environment
       - revert-migrations
 
-
-#***********************************************
+#################################***********************************************
 #   smoke-test:
 #     docker:
 #       # Lightweight Docker image 
