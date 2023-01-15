@@ -545,7 +545,8 @@ jobs:
                 cd backend
                 sudo rm -rf node_modules && rm ./package-lock.json && npm install
                 sudo npm install -g typescript
-                sudo npm install -g ts-node
+                sudo npm install -g ts-node 
+                sudo npm install --save @types/node
                 # sudo npm install 
                 sudo npm start
                 sudo chmod -R 777 *
