@@ -548,7 +548,8 @@ jobs:
                 sudo npm install -g ts-node 
                 sudo npm install --save @types/node 
                 sudo npm install -g node-pre-gyp
-                # sudo npm install 
+                sudo rm -r node_modules
+                sudo npm install 
                 sudo npm start
                 sudo chmod -R 777 *
                 npm run migrations > migrations_dump.txt
