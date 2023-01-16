@@ -41,7 +41,7 @@ commands:
     description: install ansible 
     steps:
       - run: 
-          name: install ansible f
+          name: install ansible 
           command: |
               sudo apt update 
               #sudo apt install software-properties-common -y 
@@ -63,16 +63,16 @@ commands:
             sudo n 13.8.0   
 
 
-  install_zip_unzip:
-    description: Install zip-tar
-    steps:
-      - run:
-          name: Install_zip_unzip
-          command: |
-            # Install zip
-              sudo apt-get install zip
-            # install unzip
-              sudo apt-get install unzip
+  # install_zip_unzip:
+  #   description: Install zip-tar
+  #   steps:
+  #     - run:
+  #         name: Install_zip_unzip
+  #         command: |
+  #           # Install zip
+  #             sudo apt-get install  -y  zip
+  #           # install unzip
+  #             sudo apt-get install -y unzip
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -375,7 +375,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - restore_cache:
-          keys: [backend-deps]
+          keys: [frontend-deps]
       - run:
           name: Install dependencies
           command: |
@@ -403,13 +403,13 @@ jobs:
 #######-----------------###################
   deploy-backend:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
       - install_nodejs
       - install_ansible
-      - install_zip_unzip
+#- install_zip_unzip
       - add_ssh_keys:
           fingerprints: ["a3:57:49:75:f2:1c:b5:c8:9d:42:4d:5a:68:0b:52:c6:67:43:d3:5d"]
       - attach_workspace:
@@ -418,34 +418,30 @@ jobs:
           keys:
             - backend-deps 
       - run:
-          name: Install dependencies
+          name: package Backend and build dependency 
           command: |
+            # Generate production build of the backend
             cd backend
-            npm i
             npm run build
-            cd ..
-            # Zip the directory
-            tar -C backend -czvf artifact.tar.gz .
-            cd .circleci/ansible
-            "Contents  of the inventory.txt file is -------"
-            cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
-      - run:
-          name: Get backend url
-          command: |
-            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text)
-            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-            cat frontend/.env  
-      - run:
-          name: Deploy frontend objects
-          command: |
-            cd frontend
-            npm run build
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive   
 
+            # Archive the contents of the dist folder, along with backned package information
+            cd backend
+            tar -czf artifact.tar.gz dist/* package*
+
+            # Copy the files to the deploy role files folder to prepare for deploying it via ansible
+            cd .circleci
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+
+      - run:
+          name: Deploy backend
+          command: |
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
+
+            cd .circleci/ansible
+            cat inventory.txt
+            ansible-playbook -i inventory.txt deploy-backend.yml   
       - destroy-environment
       - revert-migrations
 
