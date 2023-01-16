@@ -340,7 +340,7 @@ jobs:
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-      - destroy-environment
+      #- destroy-environment
       # - revert-migrations
 
 
@@ -397,8 +397,8 @@ jobs:
                 cd frontend
                 npm run build
                 aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
 
 #######-----------------###################
   deploy-backend:
@@ -443,8 +443,8 @@ jobs:
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml   
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
 
 #################################***********************************************
 #   smoke-test:
