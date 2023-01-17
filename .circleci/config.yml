@@ -432,7 +432,7 @@ jobs:
 
             # Archive the contents of the dist folder, along with backned package information
             cd ..
-            tar -czf artifact.tar.gz dist/* package*
+            tar -czf artifact.tar.gz dist/* 
 
             # Copy the files to the deploy role files folder to prepare for deploying it via ansible
             cd .circleci
