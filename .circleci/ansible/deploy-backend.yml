@@ -1,6 +1,9 @@
 ---
 - name: "configuration play."
   hosts: web
+  become: true
+  become_method: sudo
+  become_user: root
   user: ubuntu
   gather_facts: false
   vars:
