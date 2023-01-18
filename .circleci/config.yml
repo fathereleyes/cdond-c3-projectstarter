@@ -440,7 +440,7 @@ jobs:
 
             tar -czf artifact.tar.gz dist/* package*
             # Copy the files to the deploy role files folder to prepare for deploying it via ansible
-            cd .circleci.circleci/ansible/roles/deploy/files
+            cd ~
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
