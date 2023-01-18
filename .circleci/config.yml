@@ -431,17 +431,17 @@ jobs:
             sudo npm run build 
 
             # Archive the contents of the dist folder, along with backned package information
-            cd ..
-            tar -C backend -czvf artifact.tar.gz .
-            cd .circleci/ansible
+            # cd ..
+            # tar -C backend -czvf artifact.tar.gz .
+            # cd .circleci/ansible
             # echo "Contents  of the inventory.txt file is -------"
             # cat inventory.txt
             # ansible-playbook -i inventory.txt deploy-backend.yml
 
-            # tar -czf artifact.tar.gz dist/* package*
-            # Copy the files to the deploy role files folder to prepare for deploying it via ansible
-            # cd .circleci
-            # cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            tar -czf artifact.tar.gz dist/* package*
+            Copy the files to the deploy role files folder to prepare for deploying it via ansible
+            cd .circleci
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
 
       - run:
           name: Deploy backend
