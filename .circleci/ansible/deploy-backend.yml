@@ -2,8 +2,6 @@
 - name: "configuration play."
   hosts: web
   become: true
-  become_method: sudo
-  become_user: root
   user: ubuntu
   gather_facts: false
   vars:
@@ -35,7 +33,7 @@
         name: python3
         update_cache: yes 
 
-#    - setup:      
+    - setup:      
 
   roles:
     - deploy
