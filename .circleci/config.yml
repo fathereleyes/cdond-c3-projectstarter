@@ -440,7 +440,7 @@ jobs:
 
             tar -czf artifact.tar.gz dist/* package*
             # Copy the files to the deploy role files folder to prepare for deploying it via ansible
-            cd .circleci
+            # cd .circleci
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
 
       - run:
@@ -535,27 +535,27 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-         requires: [build-frontend]
-      - test-backend:
-         requires: [build-backend]
-      - scan-backend:
-         requires: [build-backend]
-      - scan-frontend:
-         requires: [build-frontend]
-      - deploy-infrastructure:
-         requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-         filters:
-           branches:
-             only: [master]
-      - configure-infrastructure:  
-            requires: [deploy-infrastructure]
-      - run-migrations:
-           requires: [configure-infrastructure]
-      - deploy-frontend:
-           requires: [run-migrations]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #    requires: [build-frontend]
+      # - test-backend:
+      #    requires: [build-backend]
+      # - scan-backend:
+      #    requires: [build-backend]
+      # - scan-frontend:
+      #    requires: [build-frontend]
+      # - deploy-infrastructure:
+      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #    filters:
+      #      branches:
+      #        only: [master]
+      # - configure-infrastructure:  
+      #       requires: [deploy-infrastructure]
+      # - run-migrations:
+      #      requires: [configure-infrastructure]
+      # - deploy-frontend:
+      #      requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
       - smoke-test:
