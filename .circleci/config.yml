@@ -439,7 +439,7 @@ jobs:
             # ansible-playbook -i inventory.txt deploy-backend.yml
 
             tar -czf artifact.tar.gz dist/* package*
-            Copy the files to the deploy role files folder to prepare for deploying it via ansible
+            # Copy the files to the deploy role files folder to prepare for deploying it via ansible
             cd .circleci
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
 
