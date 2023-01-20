@@ -430,9 +430,9 @@ jobs:
             sudo tar -czf artifact.tar.gz dist/* package* 
             sudo ls 
             echo "***********************************"
-            sudo cp artifact.tar.gz ../.circleci/ansible/roles/deploy/files
+            sudo cp artifact.tar.gz ../.circleci/ansible/roles/deploy/files/
             sudo chmod -R 777 ../.circleci/ansible/roles/deploy/files  
-            ls ../.circleci/ansible/roles/deploy/files
+            ls ../.circleci/ansible/roles/deploy/files/
             echo "####################################################"
             cd ../
             cd .circleci/ansible
