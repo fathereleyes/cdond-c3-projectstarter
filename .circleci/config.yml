@@ -430,20 +430,24 @@ jobs:
             sudo tar -czf artifact.tar.gz dist/* package* 
             sudo cp artifact.tar.gz ../.circleci/ansible/roles/deploy/files
             sudo chmod -R 777 ../.circleci/ansible/roles/deploy/files  
+            cd ../
+            cd .circleci/ansible
+            sudo cat inventory.txt
+            ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
             # cd ..
             # cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
             # echo "Contents  of the inventory.txt file is -------"
             # cat .circleci/ansible/inventory.txt 
             # ansible-playbook -i .circleci/ansible/inventory.txt  deploy-backend.yml
-      - run:
-          name: Deploy backend
-          command: |
-            export TYPEORM_MIGRATIONS_DIR=./migrations
-            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
-            cd .circleci/ansible
-            sudo cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
+      # - run:
+      #     name: Deploy backend
+      #     command: |
+      #       export TYPEORM_MIGRATIONS_DIR=./migrations
+      #       export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+      #       export TYPEORM_MIGRATIONS=./migrations/*.ts
+      #       cd .circleci/ansible
+      #       sudo cat inventory.txt
+      #       ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
       # - destroy-environment
       # - revert-migrations
 
