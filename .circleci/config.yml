@@ -406,7 +406,7 @@ jobs:
       - image: cimg/python:3.10
     steps:
       - checkout
-      - install_awscli
+    #  - install_awscli
       - install_nodejs
       - install_ansible
 #- install_zip_unzip
@@ -428,8 +428,10 @@ jobs:
             sudo npm install
             sudo npm run build 
             sudo tar -czf artifact.tar.gz dist/* package* 
+            sudo ls
             sudo cp artifact.tar.gz ../.circleci/ansible/roles/deploy/files
             sudo chmod -R 777 ../.circleci/ansible/roles/deploy/files  
+            ls ../.circleci/ansible/roles/deploy/files
             cd ../
             cd .circleci/ansible
             sudo cat inventory.txt
