@@ -412,7 +412,7 @@ jobs:
 #- install_zip_unzip
       - add_ssh_keys:
           fingerprints: ["90:88:3e:ad:b9:ab:87:52:88:95:a1:73:74:36:0b:dc:2a:e1:09:02"]
-          #fingerprints: ["a3:57:49:75:f2:1c:b5:c8:9d:42:4d:5a:68:0b:52:c6:67:43:d3:5d"]
+          ##fingerprints: ["a3:57:49:75:f2:1c:b5:c8:9d:42:4d:5a:68:0b:52:c6:67:43:d3:5d"]
       - attach_workspace:
           at: ~/
       - restore_cache:
