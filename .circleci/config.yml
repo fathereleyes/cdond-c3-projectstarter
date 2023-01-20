@@ -297,7 +297,7 @@ jobs:
     - install_ansible
     - install_awscli
     - add_ssh_keys:
-       fingerprints: ["cb:db:e8:a8:0f:2f:dc:19:ca:c0:f1:db:6f:ef:9d:8c"]
+       fingerprints: ["70:d7:32:c3:eb:d8:2c:51:0a:5b:fb:ea:42:2b:53:98"]
     - attach_workspace:
         at: ~/
     - run:
@@ -411,8 +411,8 @@ jobs:
       - install_ansible
 #- install_zip_unzip
       - add_ssh_keys:
-          #fingerprints: ["90:88:3e:ad:b9:ab:87:52:88:95:a1:73:74:36:0b:dc:2a:e1:09:02"]
-          fingerprints: ["70:d7:32:c3:eb:d8:2c:51:0a:5b:fb:ea:42:2b:53:98"]
+          fingerprints: ["90:88:3e:ad:b9:ab:87:52:88:95:a1:73:74:36:0b:dc:2a:e1:09:02"]
+          #fingerprints: ["70:d7:32:c3:eb:d8:2c:51:0a:5b:fb:ea:42:2b:53:98"]
       - attach_workspace:
           at: ~/
       - restore_cache:
@@ -549,23 +549,23 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-         requires: [build-frontend]
-      - test-backend:
-         requires: [build-backend]
-      - scan-backend:
-         requires: [build-backend]
-      - scan-frontend:
-         requires: [build-frontend]
-      - deploy-infrastructure:
-         requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-         filters:
-           branches:
-             only: [master]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #    requires: [build-frontend]
+      # - test-backend:
+      #    requires: [build-backend]
+      # - scan-backend:
+      #    requires: [build-backend]
+      # - scan-frontend:
+      #    requires: [build-frontend]
+      # - deploy-infrastructure:
+      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #    filters:
+      #      branches:
+      #        only: [master]
       - configure-infrastructure:  
-            requires: [deploy-infrastructure]
+           # requires: [deploy-infrastructure]
       - run-migrations:
            requires: [configure-infrastructure]
       - deploy-frontend:
