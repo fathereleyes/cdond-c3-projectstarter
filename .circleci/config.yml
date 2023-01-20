@@ -422,30 +422,17 @@ jobs:
       - run:
           name: package Backend and build dependency 
           command: |
-            # Generate production build of the backend
-            # cd backend 
-            # npm i 
-            # npm run build 
             cd backend 
             sudo npm install -g typescript
             sudo npm i ts-node typescript
             sudo npm install
             sudo npm run build 
-
-            # Archive the contents of the dist folder, along with backned package information
-            # cd ..
-            # tar -C backend -czvf artifact.tar.gz .
-            # cd .circleci/ansible
-            # echo "Contents  of the inventory.txt file is -------"
-            # cat inventory.txt
-            # ansible-playbook -i inventory.txt deploy-backend.yml
             tar -czf artifact.tar.gz dist/* package*
-            # Copy the files to the deploy role files folder to prepare for deploying it via ansible
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
             echo "Contents  of the inventory.txt file is -------"
-            cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            cat .circleci/ansible/inventory.txt 
+            ansible-playbook -i .circleci/ansible/inventory.txt  deploy-backend.yml
       - run:
           name: Deploy backend
           command: |
