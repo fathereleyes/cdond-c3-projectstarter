@@ -442,7 +442,7 @@ jobs:
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
-            ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
+            ansible-playbook -i inventory.txt deploy-backend.yml  
             # cd ..
             # cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
             # echo "Contents  of the inventory.txt file is -------"
@@ -475,8 +475,8 @@ jobs:
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-
               export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+              echo "${BACKEND_PUBLIC_IP}"
               if curl -s $API_URL/api/status | grep "ok"
               then
                   exit 0
