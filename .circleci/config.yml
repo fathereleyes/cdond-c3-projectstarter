@@ -411,8 +411,6 @@ jobs:
       - install_ansible
       - add_ssh_keys:
           fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
-          #fingerprints: ["90:88:3e:ad:b9:ab:87:52:88:95:a1:73:74:36:0b:dc:2a:e1:09:02"]
-          #fingerprints: ["70:d7:32:c3:eb:d8:2c:51:0a:5b:fb:ea:42:2b:53:98"]
       - attach_workspace:
           at: ~/
       - restore_cache:
@@ -426,7 +424,7 @@ jobs:
             sudo npm i ts-node typescript
             sudo npm install
             sudo npm run build 
-            sudo tar -czf artifact.tar.gz dist/* package* 
+            sudo tar -C backend -czvf artifact.tar.gz .
             sudo ls 
             echo "***********************************"
             cd ../
