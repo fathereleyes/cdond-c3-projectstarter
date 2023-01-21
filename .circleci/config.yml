@@ -409,7 +409,6 @@ jobs:
       - install_awscli
       - install_nodejs
       - install_ansible
-#- install_zip_unzip
       - add_ssh_keys:
           fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
           #fingerprints: ["90:88:3e:ad:b9:ab:87:52:88:95:a1:73:74:36:0b:dc:2a:e1:09:02"]
@@ -446,17 +445,17 @@ jobs:
             # echo "Contents  of the inventory.txt file is -------"
             # cat .circleci/ansible/inventory.txt 
             # ansible-playbook -i .circleci/ansible/inventory.txt  deploy-backend.yml
-      # - run:
-      #     name: Deploy backend
-      #     command: |
-      #       export TYPEORM_MIGRATIONS_DIR=./migrations
-      #       export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-      #       export TYPEORM_MIGRATIONS=./migrations/*.ts
+      - run:
+          name: Deploy backend
+          command: |
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
       #       cd .circleci/ansible
       #       sudo cat inventory.txt
       #       ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
-      # - destroy-environment
-      # - revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   smoke-test:
     docker:
