@@ -429,7 +429,7 @@ jobs:
             sudo tar -C backend -czvf artifact.tar.gz .
             sudo ls 
             echo "***********************************"
-            cd ../
+            # cd ../
             sudo mkdir -p   .circleci/ansible/roles/deploy/files/
             sudo cp -p backend/artifact.tar.gz .circleci/ansible/roles/deploy/files/
             sudo chmod -R 777 .circleci/ansible/roles/deploy/files  
