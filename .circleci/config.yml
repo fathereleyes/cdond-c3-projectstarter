@@ -424,6 +424,8 @@ jobs:
             sudo npm i ts-node typescript
             sudo npm install
             sudo npm run build 
+            # sudo tar -czf artifact.tar.gz dist/* package*
+            cd ..
             sudo tar -C backend -czvf artifact.tar.gz .
             sudo ls 
             echo "***********************************"
