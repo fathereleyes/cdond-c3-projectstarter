@@ -13,7 +13,8 @@
   shell: |
     cd ~/backend-app
     npm i
-
+- name: "show remote environment"
+  shell: env
 
 - name: "Executing Node app with PM2"
   shell: |
