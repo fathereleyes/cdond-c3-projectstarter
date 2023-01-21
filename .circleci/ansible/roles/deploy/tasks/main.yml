@@ -1,7 +1,7 @@
 
 - name: "copy app"
   ansible.builtin.copy:
-        src: ~/artifact.tar.gz
+        src: artifact.tar.gz
         dest: ~/artifact.tar.gz
 - name: Extract artifact
   ansible.builtin.shell: tar -xvf /home/ubuntu/artifact.tar.gz ;ls -l
