@@ -439,28 +439,21 @@ jobs:
             echo "####################################################"
             cd .circleci/ansible
             sudo cat inventory.txt
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
             ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
             # cd ..
             # cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files 
             # echo "Contents  of the inventory.txt file is -------"
             # cat .circleci/ansible/inventory.txt 
             # ansible-playbook -i .circleci/ansible/inventory.txt  deploy-backend.yml
-      - run:
-          name: Deploy backend
-          command: |
-
-            export  TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
-            export  TYPEORM_MIGRATIONS_DIR: "{{ lookup('env', 'TYPEORM_MIGRATIONS_DIR') }}"
-            export  TYPEORM_ENTITIES: "{{ lookup('env', 'TYPEORM_ENTITIES') }}"
-            export  TYPEORM_MIGRATIONS: "{{ lookup('env', 'TYPEORM_MIGRATIONS') }}"
-            export  TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
-            export  TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
-            export  TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
-            export  TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
-            export  TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"   
-            # export TYPEORM_MIGRATIONS_DIR=./migrations
-            # export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            # export TYPEORM_MIGRATIONS=./migrations/*.ts
+      # - run:
+      #     name: Deploy backend
+      #     command: |
+      #       export TYPEORM_MIGRATIONS_DIR=./migrations
+      #       export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+      #       export TYPEORM_MIGRATIONS=./migrations/*.ts
       #       cd .circleci/ansible
       #       sudo cat inventory.txt
       #       ansible-playbook -i inventory.txt deploy-backend.yml   -vvv
@@ -559,31 +552,31 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend
-      # - test-frontend:
-      #    requires: [build-frontend]
-      # - test-backend:
-      #    requires: [build-backend]
-      # - scan-backend:
-      #    requires: [build-backend]
-      # - scan-frontend:
-      #    requires: [build-frontend]
-      # - deploy-infrastructure:
-      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #    filters:
-      #      branches:
-      #        only: [master]
-      # - configure-infrastructure:  
-      #      requires: [deploy-infrastructure]
-      # - run-migrations:
-      #      requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #      requires: [run-migrations]
-      # - deploy-backend:
-      #    requires: [run-migrations]
-      - smoke-test
-         # requires: [deploy-backend, deploy-frontend ]
+      - build-frontend
+      - build-backend
+      - test-frontend:
+         requires: [build-frontend]
+      - test-backend:
+         requires: [build-backend]
+      - scan-backend:
+         requires: [build-backend]
+      - scan-frontend:
+         requires: [build-frontend]
+      - deploy-infrastructure:
+         requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+         filters:
+           branches:
+             only: [master]
+      - configure-infrastructure:  
+           requires: [deploy-infrastructure]
+      - run-migrations:
+           requires: [configure-infrastructure]
+      - deploy-frontend:
+           requires: [run-migrations]
+      - deploy-backend:
+         requires: [run-migrations]
+      - smoke-test:
+         requires: [deploy-backend, deploy-frontend ]
       - cloudfront-update:
           requires: [smoke-test]
       - cleanup:
