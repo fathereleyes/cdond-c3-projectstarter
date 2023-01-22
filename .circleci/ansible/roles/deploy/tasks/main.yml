@@ -23,7 +23,7 @@
 - name: "show remote environment"
   shell: env
 - name: "start server"
-  become: true
+  # become: true
   command: pm2 start -f dist/main.js
   args:
     chdir: /home/ubuntu/
