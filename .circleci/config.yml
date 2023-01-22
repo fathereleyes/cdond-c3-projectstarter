@@ -544,14 +544,14 @@ workflows:
         #  filters:
         #    branches:
         #      only: [master]
-      # - configure-infrastructure:  
-      #       requires: [scan-backend]
+      - configure-infrastructure 
+            #requires: [scan-backend]
       # - run-migrations:
       #      requires: [configure-infrastructure]
       # - deploy-frontend:
       #      requires: [run-migrations]
-      - deploy-backend
-        # requires: [configure-infrastructure]
+      - deploy-backend:
+         requires: [configure-infrastructure]
       - smoke-test:
            requires: [deploy-backend ]
       # - cloudfront-update:
