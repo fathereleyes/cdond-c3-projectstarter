@@ -403,31 +403,59 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
       - attach_workspace:
-          at: ~/
+                at: ~/
       - restore_cache:
-          keys:
-            - backend-deps 
+          keys: [backend-deps]
       - run:
-          name: package Backend and build dependency 
-          command: |
-            cd backend 
+         name: npm install
+         command: |
+            cd backend
             npm install
-            npm run build 
-            # sudo tar -czf artifact.tar.gz dist/* package*
+      - run:
+          name: Package backend
+          command: |
+            cd backend
+            npm run build
+            tar -czvf artifact.tar.gz dist/* package*
             cd ..
-            tar -C backend -czvf artifact.tar.gz .
-            ls 
-            echo "***********************************"
-            # cd ../
-            mkdir -p   .circleci/ansible/roles/deploy/files/
-            cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
-            chmod -R 777 .circleci/ansible/roles/deploy/files  
-            ls .circleci/ansible/roles/deploy/
-            ls .circleci/ansible/roles/deploy/files/
-            echo "####################################################"
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+      - run:
+          name: Deploy backend
+          command: |
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
             cd .circleci/ansible
+            echo "Contents  of the inventory file is -------"
             cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml  
+            ansible-playbook -i inventory.txt deploy-backend.yml
+
+      # - attach_workspace:
+      #     at: ~/
+      # - restore_cache:
+      #     keys:
+      #       - backend-deps 
+      # - run:
+      #     name: package Backend and build dependency 
+      #     command: |
+      #       cd backend 
+      #       npm install
+      #       npm run build 
+      #       # sudo tar -czf artifact.tar.gz dist/* package*
+      #       cd ..
+      #       tar -C backend -czvf artifact.tar.gz .
+      #       ls 
+      #       echo "***********************************"
+      #       # cd ../
+      #       mkdir -p   .circleci/ansible/roles/deploy/files/
+      #       cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
+      #       chmod -R 777 .circleci/ansible/roles/deploy/files  
+      #       ls .circleci/ansible/roles/deploy/
+      #       ls .circleci/ansible/roles/deploy/files/
+      #       echo "####################################################"
+      #       cd .circleci/ansible
+      #       cat inventory.txt
+      #       ansible-playbook -i inventory.txt deploy-backend.yml  
 
   smoke-test:
     docker:
@@ -528,29 +556,29 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      # - deploy-infrastructure:
+      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     filters:
+      #       branches:
+      #         only: [master]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
+      # - deploy-frontend:
+      #     requires: [run-migrations]
+      # - deploy-backend:
+      #     requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
