@@ -469,6 +469,12 @@ jobs:
       - install_nodejs
 
       - run:
+          name: Install dependencies
+          command: |
+            # your code here
+            sudo apt install -y curl
+
+      - run:
           name: Backend smoke test.
           command: |
               BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
@@ -552,28 +558,27 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
+      - build-frontend
       - build-backend
-      # - test-frontend:
-      #    requires: [build-frontend]
-      # - test-backend:
-      #    requires: [build-backend]
-      # - scan-backend:
-      #    requires: [build-backend]
-      # - scan-frontend:
-      #    requires: [build-frontend]
-      # - deploy-infrastructure:
-      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-        #  filters:
-        #    branches:
-        #      only: [master]
-      #- configure-infrastructure  
-          #  requires: [deploy-infrastructure]
+      - test-frontend:
+         requires: [build-frontend]
+      - test-backend:
+         requires: [build-backend]
+      - scan-backend:
+         requires: [build-backend]
+      - scan-frontend:
+         requires: [build-frontend]
+      - deploy-infrastructure:
+         requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+         filters:
+           branches:
+             only: [master]
+      - configure-infrastructure:  
+            requires: [deploy-infrastructure]
       - run-migrations:
            requires: [build-backend]
-          # requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #      requires: [run-migrations]
+      - deploy-frontend:
+           requires: [run-migrations]
       - deploy-backend:
          requires: [run-migrations]
       - smoke-test:
