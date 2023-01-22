@@ -411,8 +411,6 @@ jobs:
           name: package Backend and build dependency 
           command: |
             cd backend 
-            npm install -g typescript
-            npm i ts-node typescript
             npm install
             npm run build 
             # sudo tar -czf artifact.tar.gz dist/* package*
@@ -540,20 +538,20 @@ workflows:
          requires: [build-backend]
       # - scan-frontend:
       #    requires: [build-frontend]
-      - deploy-infrastructure:
-         requires: [ test-backend, scan-backend]
+      # - deploy-infrastructure:
+      #    requires: [ test-backend, scan-backend]
         #  requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-         filters:
-           branches:
-             only: [master]
-      - configure-infrastructure:  
-            requires: [deploy-infrastructure]
-      - run-migrations:
-           requires: [configure-infrastructure]
+        #  filters:
+        #    branches:
+        #      only: [master]
+      # - configure-infrastructure:  
+      #       requires: [deploy-infrastructure]
+      # - run-migrations:
+      #      requires: [configure-infrastructure]
       # - deploy-frontend:
       #      requires: [run-migrations]
       - deploy-backend:
-         requires: [run-migrations]
+         requires: [scan-backend]
       - smoke-test:
            requires: [deploy-backend ]
       # - cloudfront-update:
