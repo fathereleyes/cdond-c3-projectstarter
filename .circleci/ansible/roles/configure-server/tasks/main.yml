@@ -1,22 +1,45 @@
+---
 
-- name: install nvm 
+- name: "add node LTS version and NVM , then using node 13.8.0 version"
+  become: true
   shell: |
-      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-- name: install node 13.8 
-  shell: |
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-      nvm install 13.8
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt install -y nodejs
+    sudo npm install -g n
+    sudo n 13.8.0
+- name: "install pm2"
+  npm:
+    name: pm2
+    global: yes
 
 
-- name: install global packages
-  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
-  become: True
-  become_method: sudo
-  with_items:
-    - python3
-    - npm 
+
+
+
+
+
+
+
+
+
+# - name: install nvm 
+#   shell: |
+#       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+# - name: install node 13.8 
+#   shell: |
+#       export NVM_DIR="$HOME/.nvm"
+#       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#       nvm install 13.8
+
+
+# - name: install global packages
+#   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+#   become: True
+#   become_method: sudo
+#   with_items:
+#     - python3
+#     - npm 
 
 
 
