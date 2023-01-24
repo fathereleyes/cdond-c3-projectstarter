@@ -357,120 +357,231 @@ jobs:
 #           command: |
 #             # your code here
 #       # Here's where you will add some code to rollback on failure   
-#**************************************************             
+#**************************************************
   deploy-frontend:
-    docker:
-      - image: cimg/python:3.10
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
-      - restore_cache:
-          keys: [frontend-deps]
-      - run:
-          name: Install dependencies
-          command: |
-            cd frontend
-            npm install
-      - run:
-          name: Get backend url
-          command: |
-            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --output text)
-            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-            cat frontend/.env
-
-      - run:
-          name: Deploy frontend objects
-          command: |
-                cd frontend
-                npm run build
-                aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-      # - destroy-environment
-      # - revert-migrations
-
-#######-----------------###################
+      docker:
+        - image: cimg/base:stable
+      steps:
+        - checkout
+        - install_awscli
+        - install_nodejs
+        - restore_cache:
+            keys: [frontend-build]
+        - run:
+            name: Install dependencies
+            command: |
+              cd frontend
+              npm install
+        - run:
+            name: Get backend url
+            command: |
+              BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+                --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+                --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                --output text)
+              echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+              cat frontend/.env
+        - run:
+            name: Deploy frontend objects
+            command: |
+              cd frontend
+              npm run build
+              aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+        - destroy-environment
+        - revert-migrations
+        # Here's where you will add some code to rollback on failure      
+                    
   deploy-backend:
-    docker:
-      - image: cimg/python:3.10
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
-      - install_ansible
-      - add_ssh_keys:
-          fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
-      - attach_workspace:
-          at: ~/
-      - restore_cache:
-          keys:
-            - backend-deps 
-      - run:
-          name: package Backend and build dependency 
-          command: |
-            cd backend 
-            npm install
-            npm run build 
-            # sudo tar -czf artifact.tar.gz dist/* package*
-            cd ..
-            tar -C backend -czvf artifact.tar.gz .
-            ls 
-            echo "***********************************"
-            # cd ../
-            mkdir -p   .circleci/ansible/roles/deploy/files/
-            cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
-            chmod -R 777 .circleci/ansible/roles/deploy/files  
-            ls .circleci/ansible/roles/deploy/
-            ls .circleci/ansible/roles/deploy/files/
-            echo "####################################################"
-            cd .circleci/ansible
-            cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml  
+      docker:
+        - image: cimg/base:stable
+      steps:
+        - checkout
+        - install_awscli
+        - install_ansible
+        - install_nodejs
+        - add_ssh_keys:
+            fingerprints: ["1f:2c:fa:34:14:ba:dc:7e:2e:cb:87:d5:2c:f3:3d:66"]
+        - attach_workspace:
+            at: ~/
+        - restore_cache:
+            keys: [backend-build]
+        - run:
+            name: Install dependencies
+            command: |
+              cd backend
+              npm install
+        - run:
+            name: Package Backend
+            command: |
+              cd backend
+              npm run build
+              tar -czf artifact.tar.gz dist/* package*
+              cd ..
+              cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+        - run:
+            name: Deploy backend
+            command: |
+              export TYPEORM_MIGRATIONS_DIR=./migrations
+              export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+              export TYPEORM_MIGRATIONS=./migrations/*.ts
+              cd .circleci/ansible
+              cat inventory.txt
+              ansible-playbook -i inventory.txt deploy-backend.yml
+        - destroy-environment
+        - revert-migrations
+        # Here's where you will add some code to rollback on failure  
 
   smoke-test:
-    docker:
-      - image: circleci/node:13.8.0 
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
-
-      - run:
-          name: Install dependencies
-          command: |
-            # your code here
-            sudo apt install -y curl
-            sudo apt install net-tools
-
-      - run:
-          name: Backend smoke test.
-          command: |
-            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text)
-            export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-            echo "${BACKEND_PUBLIC_IP}"
-            if curl -s $API_URL/api/status | grep "ok"
-            then
+      docker:
+        - image: cimg/base:stable 
+      steps:
+        - checkout
+        - install_awscli
+        - install_nodejs      
+        - run:
+            name: Backend smoke test.
+            command: |
+              BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+                --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+                --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                --output text)
+              export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+              if curl -s $API_URL/api/status | grep "ok"
+              then
                 exit 0
-            else
+              else
                 exit 1
-            fi
+              fi
+        - run:
+            name: Frontend smoke test.
+            command: |
+              FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+              if curl -s $FRONTEND_WEBSITE | grep "Welcome"
+              then
+                exit 0
+              else
+                exit 1
+              fi
+        - destroy-environment
+        - revert-migrations
+        # Here's where you will add some code to rollback on failure  
 
-      - run:
-          name: Frontend smoke test.
-          command: |
-            FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
-            if curl -s $FRONTEND_WEBSITE | grep "Welcome"
-            then
-              # This is the intentional error, if "Welcome" is indeed in the response this step will exit with exit code 1
-              exit 0
-            else
-              exit 1
-            fi
+
+
+
+#   deploy-frontend:
+#     docker:
+#       - image: cimg/python:3.10
+#     steps:
+#       - checkout
+#       - install_awscli
+#       - install_nodejs
+#       - restore_cache:
+#           keys: [frontend-deps]
+#       - run:
+#           name: Install dependencies
+#           command: |
+#             cd frontend
+#             npm install
+#       - run:
+#           name: Get backend url
+#           command: |
+#             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+#               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+#               --query 'Reservations[*].Instances[*].PublicIpAddress' \
+#               --output text)
+#             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+#             cat frontend/.env
+
+#       - run:
+#           name: Deploy frontend objects
+#           command: |
+#                 cd frontend
+#                 npm run build
+#                 aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+#       # - destroy-environment
+#       # - revert-migrations
+
+# #######-----------------###################
+#   deploy-backend:
+#     docker:
+#       - image: cimg/python:3.10
+#     steps:
+#       - checkout
+#       - install_awscli
+#       - install_nodejs
+#       - install_ansible
+#       - add_ssh_keys:
+#           fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
+#       - attach_workspace:
+#           at: ~/
+#       - restore_cache:
+#           keys:
+#             - backend-deps 
+#       - run:
+#           name: package Backend and build dependency 
+#           command: |
+#             cd backend 
+#             npm install
+#             npm run build 
+#             # sudo tar -czf artifact.tar.gz dist/* package*
+#             cd ..
+#             tar -C backend -czvf artifact.tar.gz .
+#             ls 
+#             echo "***********************************"
+#             # cd ../
+#             mkdir -p   .circleci/ansible/roles/deploy/files/
+#             cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
+#             chmod -R 777 .circleci/ansible/roles/deploy/files  
+#             ls .circleci/ansible/roles/deploy/
+#             ls .circleci/ansible/roles/deploy/files/
+#             echo "####################################################"
+#             cd .circleci/ansible
+#             cat inventory.txt
+#             ansible-playbook -i inventory.txt deploy-backend.yml  
+
+#   smoke-test:
+#     docker:
+#       - image: circleci/node:13.8.0 
+#     steps:
+#       - checkout
+#       - install_awscli
+#       - install_nodejs
+
+#       - run:
+#           name: Install dependencies
+#           command: |
+#             # your code here
+#             sudo apt install -y curl
+#             sudo apt install net-tools
+
+#       - run:
+#           name: Backend smoke test.
+#           command: |
+#             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+#             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+#             --query 'Reservations[*].Instances[*].PublicIpAddress' \
+#             --output text)
+#             export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+#             echo "${BACKEND_PUBLIC_IP}"
+#             if curl -s $API_URL/api/status | grep "ok"
+#             then
+#                 exit 0
+#             else
+#                 exit 1
+#             fi
+
+#       - run:
+#           name: Frontend smoke test.
+#           command: |
+#             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+#             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
+#             then
+#               # This is the intentional error, if "Welcome" is indeed in the response this step will exit with exit code 1
+#               exit 0
+#             else
+#               exit 1
+#             fi
       # # - destroy-environment
       ## - revert-migrations
 
@@ -528,31 +639,31 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend
-      # - test-frontend:
-      #     requires: [build-frontend]
-      # - test-backend:
-      #     requires: [build-backend]
-      # - scan-backend:
-      #     requires: [build-backend]
-      # - scan-frontend:
-      #     requires: [build-frontend]
-      # - deploy-infrastructure:
-      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #     filters:
-      #       branches:
-      #         only: [master]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #     requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
-      - smoke-test
-        #  requires: [deploy-backend, deploy-frontend]
+      - build-frontend
+      - build-backend
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
+      - scan-backend:
+          requires: [build-backend]
+      - scan-frontend:
+          requires: [build-frontend]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [master]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
