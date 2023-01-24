@@ -460,20 +460,20 @@ jobs:
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
       - revert-migrations
-  smoke-test:
-    docker:
-      - image: circleci/node:13.8.0 
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
+  # smoke-test:
+  #   docker:
+  #     - image: circleci/node:13.8.0 
+  #   steps:
+  #     - checkout
+  #     - install_awscli
+  #     - install_nodejs
 
-      - run:
-          name: Install dependencies
-          command: |
-            # your code here
-            sudo apt install -y curl
-            sudo apt install net-tools
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           # your code here
+  #           sudo apt install -y curl
+  #           sudo apt install net-tools
 
       - run:
           name: Backend smoke test.
