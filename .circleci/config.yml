@@ -387,8 +387,8 @@ jobs:
               cd frontend
               npm run build
               aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-        - destroy-environment
-        - revert-migrations
+        # - destroy-environment
+        # - revert-migrations
         # Here's where you will add some code to rollback on failure      
                     
   deploy-backend:
@@ -400,7 +400,7 @@ jobs:
         - install_ansible
         - install_nodejs
         - add_ssh_keys:
-            fingerprints: ["1f:2c:fa:34:14:ba:dc:7e:2e:cb:87:d5:2c:f3:3d:66"]
+            fingerprints: ["d1:87:0c:4e:b9:34:1e:43:c8:c9:2a:84:df:5d:81:5c:f7:f2:34:a9"]
         - attach_workspace:
             at: ~/
         - restore_cache:
@@ -427,8 +427,8 @@ jobs:
               cd .circleci/ansible
               cat inventory.txt
               ansible-playbook -i inventory.txt deploy-backend.yml
-        - destroy-environment
-        - revert-migrations
+        # - destroy-environment
+        # - revert-migrations
         # Here's where you will add some code to rollback on failure  
 
   smoke-test:
@@ -462,8 +462,8 @@ jobs:
               else
                 exit 1
               fi
-        - destroy-environment
-        - revert-migrations
+        # - destroy-environment
+        # - revert-migrations
         # Here's where you will add some code to rollback on failure  
 
 
