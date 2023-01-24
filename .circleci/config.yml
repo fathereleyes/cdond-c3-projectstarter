@@ -460,7 +460,7 @@ jobs:
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
       - revert-migrations
-  # smoke-test:
+    smoke-test:
   #   docker:
   #     - image: circleci/node:13.8.0 
   #   steps:
