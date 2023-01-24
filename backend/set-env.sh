@@ -1,10 +1,12 @@
 export NODE_ENV=production
 export VERSION=1
 export TYPEORM_CONNECTION=postgres
-export TYPEORM_MIGRATIONS_DIR=./migrations
-export TYPEORM_ENTITIES=./src/modules/domain/**/*.entity{.ts,js}
-export TYPEORM_MIGRATIONS=./src/migrations/*.entity{.ts,js}
-export TYPEORM_HOST=glee.cbxblqcn4rsc.us-east-1.rds.amazonaws.comS
+export TYPEORM_MIGRATIONS_DIR=./src/migrations
+export TYPEORM_MIGRATIONS=./src/migrations/*.ts
+export TYPEORM_ENTITIES=./src/modules/**/*.entity.ts
+# export TYPEORM_ENTITIES=./src/modules/domain/**/*.entity{.ts,.js}
+# export TYPEORM_MIGRATIONS=./src/migrations/*.entity{.ts,.js}
+export TYPEORM_HOST=udapeople-db.cbxblqcn4rsc.us-east-1.rds.amazonaws.com
 export TYPEORM_PORT=5432
 export TYPEORM_USERNAME=postgres
 export TYPEORM_PASSWORD=password
