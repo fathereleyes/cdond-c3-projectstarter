@@ -41,12 +41,6 @@
     TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
 
 
-
-
-
-
-
----
 - name: "Creates backend app directory"
   file:
     path: ~/backend-app
