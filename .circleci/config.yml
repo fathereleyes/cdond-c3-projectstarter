@@ -173,8 +173,9 @@ jobs:
             npm run build
       ##- install_nodemodules      
       - save_cache:
-            paths: [backend/node_modules]
-            key: backend-build-depend
+            paths: [backend/node_modules] 
+            key: backend-deps-{{ checksum "backend/package-lock.json" }}       
+            # key: backend-build-depend
   
   test-frontend:
     docker:
@@ -231,9 +232,9 @@ jobs:
            
     steps:
      - checkout
-     - restore_cache:
-          keys:
-            - backend-deps-{{ checksum "backend/package-lock.json" }}
+    #  - restore_cache:
+    #       keys:
+    #         - backend-deps-{{ checksum "backend/package-lock.json" }}
      - restore_cache:
     #       keys: [backend-build-depend]
             key: backend-deps-{{ checksum "backend/package-lock.json" }}
@@ -419,34 +420,18 @@ jobs:
           key: backend-deps-{{ checksum "backend/package-lock.json" }}
 
       - run:
-          #name: package Backend and build dependency 
           name: Install dependencies
           command: |
             cd backend 
             npm install
             npm run build 
-            # sudo tar -czf artifact.tar.gz dist/* package*
       - run:
           name: Package Backend
           command: |
             cd backend
             npm run build
             tar -czf artifact.tar.gz dist/* package*
-             cd ..
-            # tar -C backend -czvf artifact.tar.gz .
-            # ls 
-            # echo "***********************************"
-            # cd ../
-            # mkdir -p   .circleci/ansible/roles/deploy/files/
-            # cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
-            # chmod -R 777 .circleci/ansible/roles/deploy/files  
-            # ls .circleci/ansible/roles/deploy/
-            # ls .circleci/ansible/roles/deploy/files/
-            # echo "####################################################"
-            # cd .circleci/ansible
-            # cat inventory.txt
-            # ansible-playbook -i inventory.txt deploy-backend.yml  
-
+            cd .. 
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
@@ -454,7 +439,6 @@ jobs:
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts    
-
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
