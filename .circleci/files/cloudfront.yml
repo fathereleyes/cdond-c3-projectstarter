@@ -36,8 +36,6 @@ Outputs:
   WorkflowID:
     Value: !Sub ${WorkflowID}
     Description: https://udapeople-aboelenien2.s3.amazonaws.com
-    #Description: https://udapeople-aboelenien.s3.amazonaws.com/index.html
-    # #Description: https://udapeople-aboelenien.s3.amazonaws.com
     
     Export:
       Name: WorkflowID
