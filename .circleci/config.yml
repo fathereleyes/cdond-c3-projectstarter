@@ -508,7 +508,7 @@ jobs:
           name: Update cloudfront distribution
           command: |
               aws cloudformation deploy \
-              --template-file cloudfront.yml \
+              --template-file .circleci/files/cloudfront.yml \
               --stack-name InitialStack \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}"
       # - destroy-environment
