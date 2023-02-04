@@ -320,7 +320,8 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      #- image: cimg/node:13.8.0
+      - image: cimg/python:3.10
     steps:
       - checkout
       - restore_cache:
