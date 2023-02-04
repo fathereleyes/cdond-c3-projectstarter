@@ -113,8 +113,6 @@ commands:
               then
                 cd ~/project/backend
                 npm install
-                npm audit fix
-                npm -y install
                 npm run migration:revert
               fi          
 
@@ -324,16 +322,16 @@ jobs:
       - image: cimg/python:3.10
     steps:
       - checkout
+      - install_awscli
+      - install_nodejs
       - restore_cache:
           keys: [backend-build-depend]
-      #- install_awscli
       - run:
           name: Run migrations
           command: |
                 cd backend
                 npm install 
                 npm run migrations > migrations_dump.txt
-
       - run: 
           name: Send migration status to kvdb.io
           command: |
