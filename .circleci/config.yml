@@ -71,7 +71,7 @@ commands:
   #         command: |
   #           # Install zip
   #             sudo apt-get install  -y  zip
-  #           # install unzip
+  ##           # install unzip
   ####             sudo apt-get install -y unzip
 
   destroy-environment:
