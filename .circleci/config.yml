@@ -457,12 +457,14 @@ jobs:
       - install_awscli
       - install_nodejs
 
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # your code here
-  #           sudo apt install -y curl
-  #           sudo apt install net-tools
+      - run:
+              name: Install dependencies
+              command: |
+                #test
+                sudo apt-get update && sudo apt-get install -yy less
+                curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                unzip awscliv2.zip
+                sudo ./aws/install
 
       - run:
           name: Backend smoke test.
