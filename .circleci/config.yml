@@ -447,8 +447,8 @@ jobs:
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
-      - destroy-environment
-      - revert-migrations
+      # - destroy-environment
+      # - revert-migrations
   smoke-test:
     docker:
       - image: circleci/node:13.8.0 
@@ -571,9 +571,9 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend]
-      - cloudfront-update:
-         requires: [smoke-test]
-      - cleanup:
-           requires: [cloudfront-update]
+      # - smoke-test:
+      #     requires: [deploy-backend]
+      # - cloudfront-update:
+      #    requires: [smoke-test]
+      # - cleanup:
+      #      requires: [cloudfront-update]

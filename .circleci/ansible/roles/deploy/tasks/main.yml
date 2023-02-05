@@ -1,32 +1,32 @@
-
-- name: "copy app"
-  ansible.builtin.copy:
-        src: artifact.tar.gz
-        dest: ~/artifact.tar.gz
-- name: Extract artifact
-  ansible.builtin.shell: tar -xvf /home/ubuntu/artifact.tar.gz ;ls -l
-- name: install pm2
-  become: true
-  become_method: sudo
-  # become_user: root
-  ansible.builtin.shell: |
-    # npm install
-    sudo npm i -g pm2
-    # pm2 stop default
-    # pm2 start npm -- start
-    # # nohup  pm2 start npm -- start &
-    # pm2 start npm -- start  </dev/null >/dev/null 2>&1 &
-- name: "delete anything that might already be running"
-  become: true
-  command: pm2 delete all
-  ignore_errors: true
-- name: "show remote environment"
-  shell: env
-- name: "start server"
-  # become: true
-  command: pm2 start -f dist/main.js
-  args:
-    chdir: /home/ubuntu/
+---
+# - name: "copy app"
+#   ansible.builtin.copy:
+#         src: artifact.tar.gz
+#         dest: ~/artifact.tar.gz
+# - name: Extract artifact
+#   ansible.builtin.shell: tar -xvf /home/ubuntu/artifact.tar.gz ;ls -l
+# - name: install pm2
+#   become: true
+#   become_method: sudo
+#   # become_user: root
+#   ansible.builtin.shell: |
+#     # npm install
+#     sudo npm i -g pm2
+#     # pm2 stop default
+#     # pm2 start npm -- start
+#     # # nohup  pm2 start npm -- start &
+#     # pm2 start npm -- start  </dev/null >/dev/null 2>&1 &
+# - name: "delete anything that might already be running"
+#   become: true
+#   command: pm2 delete all
+#   ignore_errors: true
+# - name: "show remote environment"
+#   shell: env
+# - name: "start server"
+#   # become: true
+#   command: pm2 start -f dist/main.js
+#   args:
+#     chdir: /home/ubuntu/
 
   # environment:
   #   ENVIRONMENT: production
