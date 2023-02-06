@@ -462,7 +462,7 @@ jobs:
   #         command: |
   #           # your code here
   #           sudo apt install -y curl
-  #           sudo apt install net-tools
+  ##           sudo apt install net-tools
 
       - run:
           name: Backend smoke test.
